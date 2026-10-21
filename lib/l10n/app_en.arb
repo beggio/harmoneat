@@ -1,0 +1,133 @@
+{
+  "@@locale": "en",
+  "appTitle": "HarmoNeat",
+  "@appTitle": {
+    "description": "The application's title, shown in the OS task switcher and window title."
+  },
+  "navNotes": "Notes",
+  "@navNotes": {
+    "description": "Navigation destination label for the notes list."
+  },
+  "navSettings": "Settings",
+  "@navSettings": {
+    "description": "Navigation destination label for the settings screen."
+  },
+  "notesListEmpty": "No notes yet. Tap + to create one.",
+  "@notesListEmpty": {
+    "description": "Shown in the notes list when there are no notes."
+  },
+  "notesListTitle": "Notes",
+  "@notesListTitle": {
+    "description": "App bar title for the notes list screen."
+  },
+  "newNote": "New note",
+  "@newNote": {
+    "description": "Tooltip/label for the button that creates a new note."
+  },
+  "untitledNote": "Untitled note",
+  "@untitledNote": {
+    "description": "Default title shown for a note with no title."
+  },
+  "deleteNote": "Delete note",
+  "@deleteNote": {
+    "description": "Action label for deleting a note."
+  },
+  "renameNote": "Rename note",
+  "@renameNote": {
+    "description": "Action label for renaming a note."
+  },
+  "noteTitleLabel": "Title",
+  "@noteTitleLabel": {
+    "description": "Text field label for a note's title."
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Generic cancel button label."
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Generic save button label."
+  },
+  "noteTextTabLabel": "Text",
+  "@noteTextTabLabel": {
+    "description": "Tab label for a note's free-text body."
+  },
+  "noteBodyHint": "Write something...",
+  "@noteBodyHint": {
+    "description": "Placeholder shown in the empty note body text field."
+  },
+  "attachmentsTabLabel": "Attachments",
+  "@attachmentsTabLabel": {
+    "description": "Tab label for a note's audio attachments."
+  },
+  "attachmentsListEmpty": "No recordings yet.",
+  "@attachmentsListEmpty": {
+    "description": "Shown when a note has no audio attachments."
+  },
+  "recordButtonLabel": "Record",
+  "@recordButtonLabel": {
+    "description": "Label for the button that starts recording."
+  },
+  "stopButtonLabel": "Stop",
+  "@stopButtonLabel": {
+    "description": "Label for the button that stops recording or playback."
+  },
+  "playButtonLabel": "Play",
+  "@playButtonLabel": {
+    "description": "Label for the button that starts playback of an attachment."
+  },
+  "pauseButtonLabel": "Pause",
+  "@pauseButtonLabel": {
+    "description": "Label for the button that pauses playback."
+  },
+  "importAudioLabel": "Import audio",
+  "@importAudioLabel": {
+    "description": "Label for the action that imports an existing audio file."
+  },
+  "deleteAttachment": "Delete recording",
+  "@deleteAttachment": {
+    "description": "Action label for deleting an audio attachment."
+  },
+  "tabButtonLabel": "Tab",
+  "@tabButtonLabel": {
+    "description": "Label for the toolbar button that creates a new guitar tab."
+  },
+  "chordButtonLabel": "Chord",
+  "@chordButtonLabel": {
+    "description": "Label for the toolbar button that creates a new chord chart."
+  },
+  "notationButtonLabel": "Notation",
+  "@notationButtonLabel": {
+    "description": "Label for the toolbar button that creates a new standard notation sheet."
+  },
+  "comingSoonMessage": "The {feature} editor isn't built yet — this button is a placeholder.",
+  "@comingSoonMessage": {
+    "description": "Shown on a stub screen for a toolbar action whose editor hasn't been implemented yet.",
+    "placeholders": {
+      "feature": {
+        "type": "String"
+      }
+    }
+  },
+  "cloudStorageNoticeTitle": "Audio files may sync to the cloud",
+  "@cloudStorageNoticeTitle": {
+    "description": "Title of the one-time dialog warning that recordings/imports land in a cloud-synced folder."
+  },
+  "cloudStorageNoticeMessage": "This device stores documents in a {provider} folder. Recordings and audio you import in HarmoNeat are saved there too, so they may be uploaded to that account automatically. If you'd rather keep them local, change where your documents are stored in your OS settings.",
+  "@cloudStorageNoticeMessage": {
+    "description": "Body text of the cloud-storage acknowledgement dialog.",
+    "placeholders": {
+      "provider": {
+        "type": "String"
+      }
+    }
+  },
+  "cloudStorageNoticeAcknowledge": "Got it",
+  "@cloudStorageNoticeAcknowledge": {
+    "description": "Button label that dismisses the cloud-storage acknowledgement dialog."
+  },
+  "cloudStorageNoticeDontShowAgain": "Don't show this again",
+  "@cloudStorageNoticeDontShowAgain": {
+    "description": "Checkbox label in the cloud-storage acknowledgement dialog that suppresses future showings."
+  }
+}
