@@ -208,3 +208,15 @@
   build always starts genuinely empty, on this machine or any tester's. Verified by
   rebuilding the package and confirming the new file is freshly created at launch
   and byte-for-byte different from the dev database.
+  - **Follow-up caveat (same day):** a re-test on this dev machine still showed an
+    "Untitled note" after a brand-new extraction of the zip. Traced it by querying
+    the beta database directly (`package:sqlite3`, no CLI tool needed) — the note
+    was real, created during an earlier smoke-test run, and the zip itself contains
+    no database file (confirmed via `unzip -l`). Root cause: `harmoneat_beta.sqlite`
+    is keyed by app identity in `%APPDATA%`, not by which folder the zip was
+    extracted to, so *any* beta build run previously on this same machine leaves
+    behind a file that *every later* beta build here reuses — a fresh unzip looks
+    like a fresh install but isn't, on a machine that's run one before. Deleted the
+    stray file and confirmed a truly clean run shows no notes. Documented as a
+    permanent caveat in `BETA_TESTING.md` (testing "does a new install start empty"
+    needs either a different machine or deleting that file first).

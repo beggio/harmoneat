@@ -41,3 +41,23 @@ offline.
 A production build is just the normal `flutter build windows` (or any
 other platform) with no `--dart-define` flags — the beta system is
 compiled out entirely.
+
+## Caveat: re-testing on the same machine isn't a clean install
+
+The beta database (`harmoneat_beta.sqlite`) lives in the OS's per-user
+app-support folder (on Windows, `%APPDATA%\com.harmoneat\harmoneat\`),
+keyed by the app's identity — not by which folder you extracted the zip
+into or which copy of `harmoneat.exe` you ran. The zip itself never
+contains a database file.
+
+That means: once any beta build has run once on a given machine, that
+file exists and every later beta build on *that same machine* — a new
+extraction, a different `dist/` zip, doesn't matter — reuses it, data and
+all. A fresh unzip looks like a fresh install but isn't, if a beta build
+has run on that machine before.
+
+To actually verify "does a new install start empty," either test on a
+genuinely different machine, or delete the file first:
+`%APPDATA%\com.harmoneat\harmoneat\harmoneat_beta.sqlite`. This doesn't
+touch `harmoneat.sqlite` (the regular dev/production database) — only the
+beta-specific file.
