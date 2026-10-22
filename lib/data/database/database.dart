@@ -6,6 +6,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../beta/beta_config.dart';
 import 'tables/attachments_table.dart';
 import 'tables/chord_charts_table.dart';
 import 'tables/guitar_tabs_table.dart';
@@ -113,7 +114,12 @@ class AppDatabase extends _$AppDatabase {
 QueryExecutor _openConnection() {
   return LazyDatabase(() async {
     final dir = await getApplicationSupportDirectory();
-    final file = File(p.join(dir.path, 'harmoneat.sqlite'));
+    // A beta build uses its own database file, entirely separate from
+    // the regular dev/production one — so every beta build (on this
+    // machine or a tester's) always starts empty, never carrying over
+    // whatever test data already exists from day-to-day development.
+    final fileName = kBetaBuild ? 'harmoneat_beta.sqlite' : 'harmoneat.sqlite';
+    final file = File(p.join(dir.path, fileName));
     return NativeDatabase.createInBackground(file);
   });
 }

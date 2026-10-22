@@ -197,3 +197,14 @@
   beta feedback/crash/usage system compiled in) and smoke-tested the extracted
   `harmoneat.exe` standalone — launches and stays running outside of `flutter run`,
   confirming the packaged build is actually viable, not just the dev-mode one.
+
+- **~~Beta builds no longer share a database with the dev install~~ (shipped
+  2026-10-22).** The first packaged build opened the same `harmoneat.sqlite` as the
+  regular dev app (on Windows, `getApplicationSupportDirectory()` resolves by app
+  identity, not by which copy of the exe is running), so the user's day-to-day test
+  notes showed up in what was meant to be a fresh beta package. `_openConnection` in
+  `lib/data/database/database.dart` now picks `harmoneat_beta.sqlite` instead of
+  `harmoneat.sqlite` whenever `kBetaBuild` is true — a different file, so a beta
+  build always starts genuinely empty, on this machine or any tester's. Verified by
+  rebuilding the package and confirming the new file is freshly created at launch
+  and byte-for-byte different from the dev database.
