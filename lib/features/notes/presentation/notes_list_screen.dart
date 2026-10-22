@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../beta/beta_config.dart';
+import '../../../beta/usage_tracker.dart';
 import '../../../data/database/database.dart';
 import '../../../data/providers.dart';
 import '../../../l10n/app_localizations.dart';
@@ -47,6 +49,9 @@ class NotesListScreen extends ConsumerWidget {
         tooltip: l10n.newNote,
         onPressed: () async {
           final id = await ref.read(notesRepositoryProvider).create();
+          if (kBetaBuild) {
+            ref.read(usageTrackerProvider.notifier).increment('note_created');
+          }
           if (context.mounted) {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (_) => NoteDetailScreen(noteId: id)),

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/theme.dart';
+import '../../../beta/beta_config.dart';
+import '../../../beta/usage_tracker.dart';
 import '../../../data/database/database.dart';
 import '../../../data/providers.dart';
 import '../../../l10n/app_localizations.dart';
@@ -92,6 +94,9 @@ class NoteDetailToolbar extends ConsumerWidget {
     final tab = await ref
         .read(guitarTabsRepositoryProvider)
         .createBlank(noteId);
+    if (kBetaBuild) {
+      ref.read(usageTrackerProvider.notifier).increment('tab_created');
+    }
     if (!context.mounted) return;
     Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => TabEditorScreen(tabId: tab.id)),
@@ -102,6 +107,9 @@ class NoteDetailToolbar extends ConsumerWidget {
     final chart = await ref
         .read(chordChartsRepositoryProvider)
         .createBlank(noteId);
+    if (kBetaBuild) {
+      ref.read(usageTrackerProvider.notifier).increment('chord_chart_created');
+    }
     if (!context.mounted) return;
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -117,6 +125,11 @@ class NoteDetailToolbar extends ConsumerWidget {
     final sheet = await ref
         .read(notationSheetsRepositoryProvider)
         .createBlank(noteId);
+    if (kBetaBuild) {
+      ref
+          .read(usageTrackerProvider.notifier)
+          .increment('notation_sheet_created');
+    }
     if (!context.mounted) return;
     Navigator.of(context).push(
       MaterialPageRoute(

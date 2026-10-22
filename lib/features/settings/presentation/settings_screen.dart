@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/color_schemes.dart';
 import '../../../app/theme.dart';
+import '../../../beta/beta_config.dart';
+import '../../../beta/beta_feedback_dialog.dart';
 import '../../../l10n/app_localizations.dart';
 
 const _largePrintScale = 1.3;
@@ -59,6 +61,28 @@ class SettingsScreen extends ConsumerWidget {
               ],
             ),
           ),
+          if (kBetaBuild) ...[
+            const Divider(height: 1),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+              child: Text(
+                l10n.betaSectionLabel,
+                style: Theme.of(context).textTheme.labelLarge,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+              child: Text(
+                l10n.betaDisclosureMessage,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.feedback_outlined),
+              title: Text(l10n.sendFeedbackLabel),
+              onTap: () => showBetaFeedbackDialog(context, ref),
+            ),
+          ],
         ],
       ),
     );

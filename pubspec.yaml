@@ -50,6 +50,8 @@ dependencies:
   media_kit_libs_windows_audio: ^1.0.9
   media_kit_libs_linux: ^1.2.1
   google_fonts: ^6.2.1
+  http: ^1.2.2
+  package_info_plus: ^10.2.2
 
 dev_dependencies:
   flutter_test:

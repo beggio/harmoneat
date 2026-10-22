@@ -132,3 +132,19 @@
   via a new `ChordDiagramPreview` widget (`lib/features/resources/presentation/`) that
   reuses the chord editor's own `ChordDiagramPainter` directly — same look, same
   finger-color legend — just without the tap-to-edit interactivity.
+
+- **~~Beta-testing feedback/crash/usage collection + packaging~~ (shipped
+  2026-10-22).** Added `lib/beta/`, gated entirely by a compile-time
+  `bool.fromEnvironment('BETA_BUILD')` constant — a production build with no
+  `--dart-define` flags tree-shakes the whole system out, not just hides it at
+  runtime. In a beta build: a "Send Feedback" entry on Settings, automatic uncaught-
+  exception reporting (`crash_reporter.dart`), and local usage counters
+  (`usage_tracker.dart`, incremented at note/tab/chord-chart/notation-sheet creation)
+  attached to every submission. Everything posts to a Discord webhook as an embed
+  (`beta_webhook_client.dart`), falling back to a local `beta_submissions.log` file on
+  failure so nothing's lost offline. `scripts/build_beta.ps1` builds a release Windows
+  package with the flag and webhook URL (read from the gitignored `beta.local.json`,
+  never committed) baked in, then zips it to `dist/` for sending to testers — see
+  `BETA_TESTING.md`. Tests lock in that the whole system is genuinely inert without
+  the build flag (`test/beta/beta_gating_test.dart`): no network calls, no counter
+  writes.

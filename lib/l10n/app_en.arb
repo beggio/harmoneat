@@ -471,5 +471,33 @@
   "allChordsSubtitle": "Every major and minor chord in standard tuning",
   "@allChordsSubtitle": {
     "description": "One-line description shown under the All Chords entry on the resources list."
+  },
+  "betaSectionLabel": "Beta Testing",
+  "@betaSectionLabel": {
+    "description": "Heading for the beta-testing section on the settings screen, only present in beta builds."
+  },
+  "betaDisclosureMessage": "This beta build sends feedback and crash reports to the developer to help improve the app.",
+  "@betaDisclosureMessage": {
+    "description": "One-line disclosure shown under the Beta Testing heading."
+  },
+  "sendFeedbackLabel": "Send Feedback",
+  "@sendFeedbackLabel": {
+    "description": "Button label that opens the beta feedback dialog."
+  },
+  "feedbackDialogTitle": "Send Feedback",
+  "@feedbackDialogTitle": {
+    "description": "Title of the beta feedback dialog."
+  },
+  "feedbackFieldHint": "Bugs, confusing bits, anything on your mind...",
+  "@feedbackFieldHint": {
+    "description": "Placeholder text in the feedback text field."
+  },
+  "feedbackSentMessage": "Thanks! Feedback sent.",
+  "@feedbackSentMessage": {
+    "description": "Confirmation shown after feedback is successfully sent."
+  },
+  "feedbackSavedLocallyMessage": "Couldn't reach the server — saved locally instead.",
+  "@feedbackSavedLocallyMessage": {
+    "description": "Shown when feedback couldn't be sent and was saved to a local log file instead."
   }
 }

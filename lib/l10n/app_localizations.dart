@@ -747,6 +747,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Every major and minor chord in standard tuning'**
   String get allChordsSubtitle;
+
+  /// Heading for the beta-testing section on the settings screen, only present in beta builds.
+  ///
+  /// In en, this message translates to:
+  /// **'Beta Testing'**
+  String get betaSectionLabel;
+
+  /// One-line disclosure shown under the Beta Testing heading.
+  ///
+  /// In en, this message translates to:
+  /// **'This beta build sends feedback and crash reports to the developer to help improve the app.'**
+  String get betaDisclosureMessage;
+
+  /// Button label that opens the beta feedback dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Feedback'**
+  String get sendFeedbackLabel;
+
+  /// Title of the beta feedback dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Feedback'**
+  String get feedbackDialogTitle;
+
+  /// Placeholder text in the feedback text field.
+  ///
+  /// In en, this message translates to:
+  /// **'Bugs, confusing bits, anything on your mind...'**
+  String get feedbackFieldHint;
+
+  /// Confirmation shown after feedback is successfully sent.
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks! Feedback sent.'**
+  String get feedbackSentMessage;
+
+  /// Shown when feedback couldn't be sent and was saved to a local log file instead.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t reach the server — saved locally instead.'**
+  String get feedbackSavedLocallyMessage;
 }
 
 class _AppLocalizationsDelegate

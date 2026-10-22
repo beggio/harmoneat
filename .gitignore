@@ -49,3 +49,7 @@ app.*.map.json
 
 # Claude Code personal overrides
 .claude/settings.local.json
+
+# Beta-testing secrets (webhook URL) — never commit, read by scripts/build_beta.ps1
+/beta.local.json
+/dist/

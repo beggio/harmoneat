@@ -352,4 +352,28 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get allChordsSubtitle =>
       'Every major and minor chord in standard tuning';
+
+  @override
+  String get betaSectionLabel => 'Beta Testing';
+
+  @override
+  String get betaDisclosureMessage =>
+      'This beta build sends feedback and crash reports to the developer to help improve the app.';
+
+  @override
+  String get sendFeedbackLabel => 'Send Feedback';
+
+  @override
+  String get feedbackDialogTitle => 'Send Feedback';
+
+  @override
+  String get feedbackFieldHint =>
+      'Bugs, confusing bits, anything on your mind...';
+
+  @override
+  String get feedbackSentMessage => 'Thanks! Feedback sent.';
+
+  @override
+  String get feedbackSavedLocallyMessage =>
+      'Couldn\'t reach the server — saved locally instead.';
 }
