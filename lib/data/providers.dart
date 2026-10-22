@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../platform/app_directories.dart';
 import 'database/database.dart';
 import 'repositories/attachments_repository.dart';
+import 'repositories/chord_charts_repository.dart';
 import 'repositories/guitar_tabs_repository.dart';
 import 'repositories/notes_repository.dart';
 
@@ -32,4 +33,8 @@ final attachmentsRepositoryProvider = Provider<AttachmentsRepository>((ref) {
 
 final guitarTabsRepositoryProvider = Provider<GuitarTabsRepository>((ref) {
   return GuitarTabsRepository(ref.watch(appDatabaseProvider));
+});
+
+final chordChartsRepositoryProvider = Provider<ChordChartsRepository>((ref) {
+  return ChordChartsRepository(ref.watch(appDatabaseProvider));
 });

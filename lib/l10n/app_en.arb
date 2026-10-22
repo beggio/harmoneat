@@ -233,5 +233,41 @@
   "colorSchemeUrbanCamoLabel": "Urban Camo",
   "@colorSchemeUrbanCamoLabel": {
     "description": "A camouflage-inspired olive/khaki/tan dark color scheme."
+  },
+  "chordChartsTabLabel": "Chords",
+  "@chordChartsTabLabel": {
+    "description": "Tab label for a note's list of chord charts."
+  },
+  "chordChartsListEmpty": "No chord charts yet. Tap Chord in the toolbar to add one.",
+  "@chordChartsListEmpty": {
+    "description": "Shown when a note has no chord charts."
+  },
+  "untitledChordChartTitle": "Untitled chord chart",
+  "@untitledChordChartTitle": {
+    "description": "Default title shown for a chord chart with no title."
+  },
+  "renameChordChart": "Rename chord chart",
+  "@renameChordChart": {
+    "description": "Action label for renaming a chord chart."
+  },
+  "deleteChordChart": "Delete chord chart",
+  "@deleteChordChart": {
+    "description": "Action label for deleting a chord chart."
+  },
+  "addChordLabel": "Add chord",
+  "@addChordLabel": {
+    "description": "Tooltip for the action that appends a new chord diagram to a chord chart."
+  },
+  "removeChordLabel": "Remove chord",
+  "@removeChordLabel": {
+    "description": "Tooltip for the action that removes one chord diagram from a chord chart."
+  },
+  "untitledChordLabel": "Untitled",
+  "@untitledChordLabel": {
+    "description": "Default label shown for a chord diagram with no name."
+  },
+  "chordNameDialogTitle": "Chord name",
+  "@chordNameDialogTitle": {
+    "description": "Title and field label for the dialog that names a chord diagram (e.g. \"C\", \"G7\")."
   }
 }

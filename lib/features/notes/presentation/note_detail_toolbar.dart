@@ -9,6 +9,7 @@ import '../../../data/database/database.dart';
 import '../../../data/providers.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../audio/application/audio_recorder_controller.dart';
+import '../../chord/presentation/chord_editor_screen.dart';
 import '../../tab/presentation/tab_editor_screen.dart';
 import 'coming_soon_screen.dart';
 
@@ -70,8 +71,7 @@ class NoteDetailToolbar extends ConsumerWidget {
                 ),
                 const SizedBox(width: 12),
                 OutlinedButton.icon(
-                  onPressed: () =>
-                      _openComingSoon(context, l10n.chordButtonLabel),
+                  onPressed: () => _createAndOpenChord(context, ref),
                   icon: const Icon(Icons.grid_on_outlined),
                   label: Text(l10n.chordButtonLabel),
                 ),
@@ -105,6 +105,18 @@ class NoteDetailToolbar extends ConsumerWidget {
     if (!context.mounted) return;
     Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => TabEditorScreen(tabId: tab.id)),
+    );
+  }
+
+  Future<void> _createAndOpenChord(BuildContext context, WidgetRef ref) async {
+    final chart = await ref
+        .read(chordChartsRepositoryProvider)
+        .createBlank(noteId);
+    if (!context.mounted) return;
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ChordEditorScreen(chartId: chart.id),
+      ),
     );
   }
 

@@ -7,12 +7,14 @@ import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
 import 'tables/attachments_table.dart';
+import 'tables/chord_charts_table.dart';
 import 'tables/guitar_tabs_table.dart';
 import 'tables/instruments_table.dart';
 import 'tables/notes_table.dart';
 import 'tables/parts_table.dart';
 
 export 'tables/attachments_table.dart';
+export 'tables/chord_charts_table.dart';
 export 'tables/guitar_tabs_table.dart';
 export 'tables/instruments_table.dart';
 export 'tables/notes_table.dart';
@@ -22,12 +24,14 @@ part 'database.g.dart';
 
 const guitarInstrumentId = 'instrument-guitar';
 
-@DriftDatabase(tables: [Notes, Attachments, Instruments, Parts, GuitarTabs])
+@DriftDatabase(
+  tables: [Notes, Attachments, Instruments, Parts, GuitarTabs, ChordCharts],
+)
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -38,6 +42,9 @@ class AppDatabase extends _$AppDatabase {
     onUpgrade: (m, from, to) async {
       if (from < 2) {
         await m.createTable(guitarTabs);
+      }
+      if (from < 3) {
+        await m.createTable(chordCharts);
       }
     },
   );

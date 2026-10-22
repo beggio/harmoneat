@@ -54,16 +54,17 @@
   the schema; plan called for a hand-rolled `CustomPainter` editor/renderer rather than
   a third-party package) — this entry is the concrete trigger to build it.
 
-- **"Chord" button in the note-detail toolbar — chord chart editor.** Tapping it
-  creates a new blank guitar chord chart (chord diagram notation — see
-  https://www.libertyparkmusic.com/read-guitar-chord-diagrams/ for the format: a small
-  grid of vertical strings and horizontal frets, with dots marking where fingers go and
-  markers for open/muted strings). Users need to add individual notes and chords to it,
-  and change, edit, delete, and add further charts for the same note. This is Phase 3
-  of the original roadmap (`chord_charts` table already FK'd to `parts` in the schema;
-  plan called for a hand-rolled `CustomPainter` editor/renderer rather than a
-  third-party package) — this entry is the concrete trigger to build it, alongside the
-  "Tab" entry above for Phase 4.
+- **~~"Chord" button in the note-detail toolbar — chord chart editor~~ (shipped
+  2026-10-22).** Tapping it creates a blank chord chart and opens
+  `lib/features/chord/presentation/chord_editor_screen.dart`: an ordered, horizontally
+  scrollable sequence of named chord diagrams (`ChordChartData`/`ChordDiagram`/
+  `ChordString` in `chord_chart_data.dart`), each rendered as a standard diagram —
+  vertical string lines, horizontal fret lines via `ChordDiagramPainter`, "O"/"X"
+  markers above the nut for open/muted strings, and colored dots for fretted notes with
+  the same optional 1-5 finger assignment and tuning dropdown (E / E♭ / Drop D) as the
+  Tab editor. New `chord_charts` Drift table (schema v3) FK'd to `parts`, mirroring
+  `guitar_tabs`; a "Chords" list tab was added to the note detail screen alongside
+  Tabs, and note deletion now cascades to chord charts too.
 
 - **"Notation" button in the note-detail toolbar — standard notation editor.** Tapping it
   creates a new blank standard notation sheet. Users need to add individual notes and

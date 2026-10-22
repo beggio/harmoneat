@@ -181,4 +181,32 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get colorSchemeUrbanCamoLabel => 'Urban Camo';
+
+  @override
+  String get chordChartsTabLabel => 'Chords';
+
+  @override
+  String get chordChartsListEmpty =>
+      'No chord charts yet. Tap Chord in the toolbar to add one.';
+
+  @override
+  String get untitledChordChartTitle => 'Untitled chord chart';
+
+  @override
+  String get renameChordChart => 'Rename chord chart';
+
+  @override
+  String get deleteChordChart => 'Delete chord chart';
+
+  @override
+  String get addChordLabel => 'Add chord';
+
+  @override
+  String get removeChordLabel => 'Remove chord';
+
+  @override
+  String get untitledChordLabel => 'Untitled';
+
+  @override
+  String get chordNameDialogTitle => 'Chord name';
 }

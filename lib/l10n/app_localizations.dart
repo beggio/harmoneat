@@ -429,6 +429,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Urban Camo'**
   String get colorSchemeUrbanCamoLabel;
+
+  /// Tab label for a note's list of chord charts.
+  ///
+  /// In en, this message translates to:
+  /// **'Chords'**
+  String get chordChartsTabLabel;
+
+  /// Shown when a note has no chord charts.
+  ///
+  /// In en, this message translates to:
+  /// **'No chord charts yet. Tap Chord in the toolbar to add one.'**
+  String get chordChartsListEmpty;
+
+  /// Default title shown for a chord chart with no title.
+  ///
+  /// In en, this message translates to:
+  /// **'Untitled chord chart'**
+  String get untitledChordChartTitle;
+
+  /// Action label for renaming a chord chart.
+  ///
+  /// In en, this message translates to:
+  /// **'Rename chord chart'**
+  String get renameChordChart;
+
+  /// Action label for deleting a chord chart.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete chord chart'**
+  String get deleteChordChart;
+
+  /// Tooltip for the action that appends a new chord diagram to a chord chart.
+  ///
+  /// In en, this message translates to:
+  /// **'Add chord'**
+  String get addChordLabel;
+
+  /// Tooltip for the action that removes one chord diagram from a chord chart.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove chord'**
+  String get removeChordLabel;
+
+  /// Default label shown for a chord diagram with no name.
+  ///
+  /// In en, this message translates to:
+  /// **'Untitled'**
+  String get untitledChordLabel;
+
+  /// Title and field label for the dialog that names a chord diagram (e.g. "C", "G7").
+  ///
+  /// In en, this message translates to:
+  /// **'Chord name'**
+  String get chordNameDialogTitle;
 }
 
 class _AppLocalizationsDelegate
