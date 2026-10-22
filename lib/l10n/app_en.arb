@@ -374,5 +374,102 @@
   "noteEventDialogTitle": "Note",
   "@noteEventDialogTitle": {
     "description": "Title for the dialog that edits one note/rest on a notation sheet."
+  },
+  "navResources": "Resources",
+  "@navResources": {
+    "description": "Navigation destination label for the resources screen."
+  },
+  "resourcesScreenTitle": "Resources",
+  "@resourcesScreenTitle": {
+    "description": "App bar title for the resources screen."
+  },
+  "circleOfFifthsTitle": "Circle of Fifths",
+  "@circleOfFifthsTitle": {
+    "description": "Title for the interactive circle of fifths tool."
+  },
+  "circleOfFifthsSubtitle": "Key signatures, relative minors, and closely related keys",
+  "@circleOfFifthsSubtitle": {
+    "description": "One-line description shown under the Circle of Fifths entry on the resources list."
+  },
+  "selectKeyPrompt": "Tap a key to see its details",
+  "@selectKeyPrompt": {
+    "description": "Prompt shown on the Circle of Fifths tool before any key is selected."
+  },
+  "relativeMinorLabel": "Relative minor",
+  "@relativeMinorLabel": {
+    "description": "Label for a key's relative minor on the Circle of Fifths tool."
+  },
+  "keySignatureLabel": "Key signature",
+  "@keySignatureLabel": {
+    "description": "Label for a key's signature (sharps/flats) on the Circle of Fifths tool."
+  },
+  "noAccidentalsValue": "No sharps or flats",
+  "@noAccidentalsValue": {
+    "description": "Key signature value shown for C major / A minor, which has no sharps or flats."
+  },
+  "accidentalSummaryLabel": "{count} {unit}: {notes}",
+  "@accidentalSummaryLabel": {
+    "description": "Key signature summary, e.g. \"2 sharps: F♯, C♯\".",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "unit": {
+        "type": "String"
+      },
+      "notes": {
+        "type": "String"
+      }
+    }
+  },
+  "subdominantLabel": "Subdominant (IV)",
+  "@subdominantLabel": {
+    "description": "Label for a key's subdominant (IV) neighbor on the Circle of Fifths tool."
+  },
+  "dominantLabel": "Dominant (V)",
+  "@dominantLabel": {
+    "description": "Label for a key's dominant (V) neighbor on the Circle of Fifths tool."
+  },
+  "subdominantHint": "{key} — one step counterclockwise",
+  "@subdominantHint": {
+    "description": "Explains where the subdominant sits relative to the selected key.",
+    "placeholders": {
+      "key": {
+        "type": "String"
+      }
+    }
+  },
+  "dominantHint": "{key} — one step clockwise",
+  "@dominantHint": {
+    "description": "Explains where the dominant sits relative to the selected key.",
+    "placeholders": {
+      "key": {
+        "type": "String"
+      }
+    }
+  },
+  "sharpSingular": "sharp",
+  "@sharpSingular": {
+    "description": "Singular unit word for one sharp in a key signature summary."
+  },
+  "sharpPlural": "sharps",
+  "@sharpPlural": {
+    "description": "Plural unit word for multiple sharps in a key signature summary."
+  },
+  "flatSingular": "flat",
+  "@flatSingular": {
+    "description": "Singular unit word for one flat in a key signature summary."
+  },
+  "flatPlural": "flats",
+  "@flatPlural": {
+    "description": "Plural unit word for multiple flats in a key signature summary."
+  },
+  "allChordsTitle": "All Major & Minor Chords",
+  "@allChordsTitle": {
+    "description": "Title for the reference chart of every major and minor chord."
+  },
+  "allChordsSubtitle": "Every major and minor chord in standard tuning, shown the same way as the chord chart editor",
+  "@allChordsSubtitle": {
+    "description": "One-line description shown under the All Chords entry on the resources list."
   }
 }

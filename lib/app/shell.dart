@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../features/notes/presentation/notes_list_screen.dart';
+import '../features/resources/presentation/resources_list_screen.dart';
 import '../features/settings/presentation/settings_screen.dart';
 import '../l10n/app_localizations.dart';
 
@@ -24,6 +25,11 @@ class _AppShellState extends State<AppShell> {
       selectedIcon: Icons.note_alt,
     ),
     _Destination(
+      screen: ResourcesListScreen(),
+      icon: Icons.library_music_outlined,
+      selectedIcon: Icons.library_music,
+    ),
+    _Destination(
       screen: SettingsScreen(),
       icon: Icons.settings_outlined,
       selectedIcon: Icons.settings,
@@ -33,7 +39,7 @@ class _AppShellState extends State<AppShell> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final labels = [l10n.navNotes, l10n.navSettings];
+    final labels = [l10n.navNotes, l10n.navResources, l10n.navSettings];
     final body = IndexedStack(
       index: _selectedIndex,
       children: [for (final d in _destinations) d.screen],

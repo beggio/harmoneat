@@ -104,3 +104,31 @@
   itself is a licensed Monotype font Flutter can't reference by OS name — substituted
   JetBrains Mono (via the `google_fonts` package) as the default UI font everywhere
   until a licensed Andale Mono file is supplied to swap in.
+
+- **~~Resources section + first resource: interactive Circle of Fifths~~ (shipped
+  2026-10-22).** Added a third nav destination, `lib/features/resources/`, for
+  standalone reference tools independent of any note (unlike Tab/Chord/Notation).
+  Researched the circle before building it: order of sharps (F C G D A E B, clockwise)
+  and flats (B E A D G C F, counterclockwise) verified against Open Music Theory;
+  relative minor = major scale's 6th degree, same key signature, shown on an inner
+  ring. `circle_of_fifths_data.dart` derives each key's specific accidentals
+  programmatically from the verified sharp/flat order rather than a hand-typed table
+  (covered by `circle_of_fifths_data_test.dart`). The interactive diagram
+  (`circle_of_fifths_screen.dart`) arranges 12 major/minor button pairs by trigonometry
+  around two rings; selecting a key also highlights its dominant (V, one step
+  clockwise) and subdominant (IV, one step counterclockwise) and shows the key
+  signature in a details panel below.
+
+- **~~Second resource: every major and minor chord, reference chart~~ (shipped
+  2026-10-22).** Researched the standard construction before building it: the two
+  movable barre shapes (E-shape, rooted on the low E string; A-shape, rooted on the A
+  string, low E muted) verified against documented formulas, each confirmed with a
+  minor variant that lowers the third by one fret. 8 of the 24 chords (C/D/E/G/A
+  major, A/D/E minor) use their standard open-position fingerings instead, since
+  that's how they're actually played/taught, not the barre equivalent.
+  `all_chords_data.dart` generates all 24 from just those two shape formulas plus the
+  8 open shapes (covered by `all_chords_data_test.dart`, including a check that
+  shifting a barre shape up one fret shifts every real fret by exactly one). Renders
+  via a new `ChordDiagramPreview` widget (`lib/features/resources/presentation/`) that
+  reuses the chord editor's own `ChordDiagramPainter` directly — same look, same
+  finger-color legend — just without the tap-to-edit interactivity.

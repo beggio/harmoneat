@@ -287,4 +287,69 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noteEventDialogTitle => 'Note';
+
+  @override
+  String get navResources => 'Resources';
+
+  @override
+  String get resourcesScreenTitle => 'Resources';
+
+  @override
+  String get circleOfFifthsTitle => 'Circle of Fifths';
+
+  @override
+  String get circleOfFifthsSubtitle =>
+      'Key signatures, relative minors, and closely related keys';
+
+  @override
+  String get selectKeyPrompt => 'Tap a key to see its details';
+
+  @override
+  String get relativeMinorLabel => 'Relative minor';
+
+  @override
+  String get keySignatureLabel => 'Key signature';
+
+  @override
+  String get noAccidentalsValue => 'No sharps or flats';
+
+  @override
+  String accidentalSummaryLabel(int count, String unit, String notes) {
+    return '$count $unit: $notes';
+  }
+
+  @override
+  String get subdominantLabel => 'Subdominant (IV)';
+
+  @override
+  String get dominantLabel => 'Dominant (V)';
+
+  @override
+  String subdominantHint(String key) {
+    return '$key — one step counterclockwise';
+  }
+
+  @override
+  String dominantHint(String key) {
+    return '$key — one step clockwise';
+  }
+
+  @override
+  String get sharpSingular => 'sharp';
+
+  @override
+  String get sharpPlural => 'sharps';
+
+  @override
+  String get flatSingular => 'flat';
+
+  @override
+  String get flatPlural => 'flats';
+
+  @override
+  String get allChordsTitle => 'All Major & Minor Chords';
+
+  @override
+  String get allChordsSubtitle =>
+      'Every major and minor chord in standard tuning, shown the same way as the chord chart editor';
 }

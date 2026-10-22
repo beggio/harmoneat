@@ -633,6 +633,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Note'**
   String get noteEventDialogTitle;
+
+  /// Navigation destination label for the resources screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Resources'**
+  String get navResources;
+
+  /// App bar title for the resources screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Resources'**
+  String get resourcesScreenTitle;
+
+  /// Title for the interactive circle of fifths tool.
+  ///
+  /// In en, this message translates to:
+  /// **'Circle of Fifths'**
+  String get circleOfFifthsTitle;
+
+  /// One-line description shown under the Circle of Fifths entry on the resources list.
+  ///
+  /// In en, this message translates to:
+  /// **'Key signatures, relative minors, and closely related keys'**
+  String get circleOfFifthsSubtitle;
+
+  /// Prompt shown on the Circle of Fifths tool before any key is selected.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a key to see its details'**
+  String get selectKeyPrompt;
+
+  /// Label for a key's relative minor on the Circle of Fifths tool.
+  ///
+  /// In en, this message translates to:
+  /// **'Relative minor'**
+  String get relativeMinorLabel;
+
+  /// Label for a key's signature (sharps/flats) on the Circle of Fifths tool.
+  ///
+  /// In en, this message translates to:
+  /// **'Key signature'**
+  String get keySignatureLabel;
+
+  /// Key signature value shown for C major / A minor, which has no sharps or flats.
+  ///
+  /// In en, this message translates to:
+  /// **'No sharps or flats'**
+  String get noAccidentalsValue;
+
+  /// Key signature summary, e.g. "2 sharps: F♯, C♯".
+  ///
+  /// In en, this message translates to:
+  /// **'{count} {unit}: {notes}'**
+  String accidentalSummaryLabel(int count, String unit, String notes);
+
+  /// Label for a key's subdominant (IV) neighbor on the Circle of Fifths tool.
+  ///
+  /// In en, this message translates to:
+  /// **'Subdominant (IV)'**
+  String get subdominantLabel;
+
+  /// Label for a key's dominant (V) neighbor on the Circle of Fifths tool.
+  ///
+  /// In en, this message translates to:
+  /// **'Dominant (V)'**
+  String get dominantLabel;
+
+  /// Explains where the subdominant sits relative to the selected key.
+  ///
+  /// In en, this message translates to:
+  /// **'{key} — one step counterclockwise'**
+  String subdominantHint(String key);
+
+  /// Explains where the dominant sits relative to the selected key.
+  ///
+  /// In en, this message translates to:
+  /// **'{key} — one step clockwise'**
+  String dominantHint(String key);
+
+  /// Singular unit word for one sharp in a key signature summary.
+  ///
+  /// In en, this message translates to:
+  /// **'sharp'**
+  String get sharpSingular;
+
+  /// Plural unit word for multiple sharps in a key signature summary.
+  ///
+  /// In en, this message translates to:
+  /// **'sharps'**
+  String get sharpPlural;
+
+  /// Singular unit word for one flat in a key signature summary.
+  ///
+  /// In en, this message translates to:
+  /// **'flat'**
+  String get flatSingular;
+
+  /// Plural unit word for multiple flats in a key signature summary.
+  ///
+  /// In en, this message translates to:
+  /// **'flats'**
+  String get flatPlural;
+
+  /// Title for the reference chart of every major and minor chord.
+  ///
+  /// In en, this message translates to:
+  /// **'All Major & Minor Chords'**
+  String get allChordsTitle;
+
+  /// One-line description shown under the All Chords entry on the resources list.
+  ///
+  /// In en, this message translates to:
+  /// **'Every major and minor chord in standard tuning, shown the same way as the chord chart editor'**
+  String get allChordsSubtitle;
 }
 
 class _AppLocalizationsDelegate
