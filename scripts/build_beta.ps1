@@ -44,8 +44,17 @@ try {
     $timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
     $zipPath = Join-Path $distDir "harmoneat-beta-$timestamp.zip"
 
-    Write-Host "Zipping $releaseDir -> $zipPath"
-    Compress-Archive -Path (Join-Path $releaseDir "*") -DestinationPath $zipPath -Force
+    # Stage in a temp folder rather than zipping Release in place, so the
+    # bundled README doesn't end up sitting in the Flutter build output
+    # directory itself.
+    $stagingDir = Join-Path $distDir "staging-$timestamp"
+    New-Item -ItemType Directory -Force -Path $stagingDir | Out-Null
+    Copy-Item -Path (Join-Path $releaseDir "*") -Destination $stagingDir -Recurse
+    Copy-Item -Path (Join-Path $repoRoot "TESTER_README.md") -Destination (Join-Path $stagingDir "README.md")
+
+    Write-Host "Zipping $stagingDir -> $zipPath"
+    Compress-Archive -Path (Join-Path $stagingDir "*") -DestinationPath $zipPath -Force
+    Remove-Item -Path $stagingDir -Recurse -Force
 
     Write-Host "Done: $zipPath"
 }

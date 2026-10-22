@@ -30,10 +30,13 @@ offline.
    never commit it) and fill in your webhook URL.
 2. Run `scripts/build_beta.ps1` from the repo root (or `powershell -File
    scripts\build_beta.ps1`). It builds a Windows release with
-   `BETA_BUILD=true` and the webhook URL compiled in, then zips
-   `build\windows\x64\runner\Release` into `dist\harmoneat-beta-<timestamp>.zip`.
+   `BETA_BUILD=true` and the webhook URL compiled in, bundles
+   `TESTER_README.md` in as `README.md`, and zips the result into
+   `dist\harmoneat-beta-<timestamp>.zip`.
 3. Send that zip to testers. They unzip it and run `harmoneat.exe` — no
-   installer.
+   installer. `TESTER_README.md` at the repo root is what they'll read;
+   edit it (pre-production disclaimer, feedback instructions, what to try)
+   whenever that guidance needs to change.
 
 A production build is just the normal `flutter build windows` (or any
 other platform) with no `--dart-define` flags — the beta system is
