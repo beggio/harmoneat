@@ -29,18 +29,17 @@ class _FakeAttachmentsRepository implements AttachmentsRepository {
     required AttachmentSource source,
     String? originalFileName,
     int? durationMs,
-  }) =>
-      throw UnimplementedError();
+  }) => throw UnimplementedError();
 
   @override
   Future<Attachment> importFile({
     required String noteId,
     required File sourceFile,
-  }) =>
-      throw UnimplementedError();
+  }) => throw UnimplementedError();
 
   @override
-  Future<String> absolutePath(Attachment attachment) => throw UnimplementedError();
+  Future<String> absolutePath(Attachment attachment) =>
+      throw UnimplementedError();
 
   @override
   Future<void> delete(Attachment attachment) => throw UnimplementedError();
@@ -71,7 +70,9 @@ class _FakeNotesRepository implements NotesRepository {
 
   @override
   Stream<Note?> watchById(String id) {
-    return watchAll().map((notes) => notes.where((n) => n.id == id).firstOrNull);
+    return watchAll().map(
+      (notes) => notes.where((n) => n.id == id).firstOrNull,
+    );
   }
 
   @override
@@ -92,7 +93,10 @@ class _FakeNotesRepository implements NotesRepository {
   @override
   Future<void> rename(String id, String title) async {
     final index = _notes.indexWhere((n) => n.id == id);
-    _notes[index] = _notes[index].copyWith(title: title, updatedAt: DateTime.now());
+    _notes[index] = _notes[index].copyWith(
+      title: title,
+      updatedAt: DateTime.now(),
+    );
     _emit();
   }
 
@@ -114,7 +118,9 @@ class _FakeNotesRepository implements NotesRepository {
 }
 
 void main() {
-  testWidgets('create a note from the notes list, see it appear', (tester) async {
+  testWidgets('create a note from the notes list, see it appear', (
+    tester,
+  ) async {
     SharedPreferences.setMockInitialValues({});
     final fakeRepo = _FakeNotesRepository();
 
@@ -122,7 +128,9 @@ void main() {
       ProviderScope(
         overrides: [
           notesRepositoryProvider.overrideWithValue(fakeRepo),
-          attachmentsRepositoryProvider.overrideWithValue(_FakeAttachmentsRepository()),
+          attachmentsRepositoryProvider.overrideWithValue(
+            _FakeAttachmentsRepository(),
+          ),
         ],
         child: const HarmoNeatApp(),
       ),

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../data/providers.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../audio/presentation/attachments_tab.dart';
+import '../../tab/presentation/tabs_list_tab.dart';
 import '../application/note_detail_provider.dart';
 import 'note_body_tab.dart';
 import 'note_detail_toolbar.dart';
@@ -28,7 +29,7 @@ class NoteDetailScreen extends ConsumerWidget {
         }
         final title = note.title.isEmpty ? l10n.untitledNote : note.title;
         return DefaultTabController(
-          length: 2,
+          length: 3,
           child: Scaffold(
             appBar: AppBar(
               title: Text(title),
@@ -43,6 +44,7 @@ class NoteDetailScreen extends ConsumerWidget {
                 tabs: [
                   Tab(text: l10n.noteTextTabLabel),
                   Tab(text: l10n.attachmentsTabLabel),
+                  Tab(text: l10n.tabsTabLabel),
                 ],
               ),
             ),
@@ -54,6 +56,7 @@ class NoteDetailScreen extends ConsumerWidget {
                     children: [
                       NoteBodyTab(noteId: note.id, initialBody: note.body),
                       AttachmentsTab(noteId: note.id),
+                      TabsListTab(noteId: note.id),
                     ],
                   ),
                 ),

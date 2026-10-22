@@ -102,4 +102,62 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cloudStorageNoticeDontShowAgain => 'Don\'t show this again';
+
+  @override
+  String get tabsTabLabel => 'Tabs';
+
+  @override
+  String get tabsListEmpty =>
+      'No guitar tabs yet. Tap Tab in the toolbar to add one.';
+
+  @override
+  String get untitledTabTitle => 'Untitled tab';
+
+  @override
+  String get renameTab => 'Rename tab';
+
+  @override
+  String get deleteTab => 'Delete tab';
+
+  @override
+  String get addBeatLabel => 'Add beat';
+
+  @override
+  String get removeBeatLabel => 'Remove beat';
+
+  @override
+  String get fretDialogTitle => 'Fret';
+
+  @override
+  String get clearFretLabel => 'Clear';
+
+  @override
+  String get fingerIndexLabel => 'Index';
+
+  @override
+  String get fingerMiddleLabel => 'Middle';
+
+  @override
+  String get fingerRingLabel => 'Ring';
+
+  @override
+  String get fingerPinkyLabel => 'Pinky';
+
+  @override
+  String get fingerThumbLabel => 'Thumb';
+
+  @override
+  String get assignFingerToggleLabel => 'Assign finger';
+
+  @override
+  String get tuningFieldLabel => 'Tuning';
+
+  @override
+  String get tuningStandardLabel => 'E';
+
+  @override
+  String get tuningEFlatLabel => 'E♭';
+
+  @override
+  String get tuningDropDLabel => 'Drop D';
 }

@@ -30,8 +30,9 @@ void main() {
     final repo = NotesRepository(db, const AppDirectories());
 
     final id = await repo.create(title: 'Riff idea');
-    final parts =
-        await (db.select(db.parts)..where((p) => p.noteId.equals(id))).get();
+    final parts = await (db.select(
+      db.parts,
+    )..where((p) => p.noteId.equals(id))).get();
 
     expect(parts, hasLength(1));
     expect(parts.single.instrumentId, guitarInstrumentId);

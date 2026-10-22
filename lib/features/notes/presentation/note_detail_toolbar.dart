@@ -9,6 +9,7 @@ import '../../../data/database/database.dart';
 import '../../../data/providers.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../audio/application/audio_recorder_controller.dart';
+import '../../tab/presentation/tab_editor_screen.dart';
 import 'coming_soon_screen.dart';
 
 /// Persistent action bar for a note's detail screen — sits below the
@@ -63,8 +64,7 @@ class NoteDetailToolbar extends ConsumerWidget {
                 ),
                 const SizedBox(width: 12),
                 OutlinedButton.icon(
-                  onPressed: () =>
-                      _openComingSoon(context, l10n.tabButtonLabel),
+                  onPressed: () => _createAndOpenTab(context, ref),
                   icon: const Icon(Icons.piano_outlined),
                   label: Text(l10n.tabButtonLabel),
                 ),
@@ -95,6 +95,16 @@ class NoteDetailToolbar extends ConsumerWidget {
       MaterialPageRoute(
         builder: (context) => ComingSoonScreen(featureName: featureName),
       ),
+    );
+  }
+
+  Future<void> _createAndOpenTab(BuildContext context, WidgetRef ref) async {
+    final tab = await ref
+        .read(guitarTabsRepositoryProvider)
+        .createBlank(noteId);
+    if (!context.mounted) return;
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => TabEditorScreen(tabId: tab.id)),
     );
   }
 

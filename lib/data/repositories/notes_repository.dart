@@ -40,9 +40,9 @@ class NotesRepository {
     );
   }
 
-  /// Deletes a note along with its parts and attachment rows+files. There
-  /// are no chord_chart/tab/notation rows yet (added in later phases), so
-  /// this cascade only needs to cover attachments and parts for now.
+  /// Deletes a note along with its parts, attachment rows+files, and any
+  /// guitar tabs (chord-chart/notation rows join this cascade in their own
+  /// phases).
   Future<void> delete(String id) async {
     final noteAttachments = await (_db.select(
       _db.attachments,
@@ -55,10 +55,20 @@ class NotesRepository {
       }
     }
 
+    final noteParts = await (_db.select(
+      _db.parts,
+    )..where((pt) => pt.noteId.equals(id))).get();
+    final partIds = noteParts.map((pt) => pt.id).toList();
+
     await _db.transaction(() async {
       await (_db.delete(
         _db.attachments,
       )..where((a) => a.noteId.equals(id))).go();
+      if (partIds.isNotEmpty) {
+        await (_db.delete(
+          _db.guitarTabs,
+        )..where((t) => t.partId.isIn(partIds))).go();
+      }
       await (_db.delete(_db.parts)..where((pt) => pt.noteId.equals(id))).go();
       await (_db.delete(_db.notes)..where((n) => n.id.equals(id))).go();
     });

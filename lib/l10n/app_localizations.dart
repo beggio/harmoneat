@@ -273,6 +273,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Don\'t show this again'**
   String get cloudStorageNoticeDontShowAgain;
+
+  /// Tab label for a note's list of guitar tabs.
+  ///
+  /// In en, this message translates to:
+  /// **'Tabs'**
+  String get tabsTabLabel;
+
+  /// Shown when a note has no guitar tabs.
+  ///
+  /// In en, this message translates to:
+  /// **'No guitar tabs yet. Tap Tab in the toolbar to add one.'**
+  String get tabsListEmpty;
+
+  /// Default title shown for a guitar tab with no title.
+  ///
+  /// In en, this message translates to:
+  /// **'Untitled tab'**
+  String get untitledTabTitle;
+
+  /// Action label for renaming a guitar tab.
+  ///
+  /// In en, this message translates to:
+  /// **'Rename tab'**
+  String get renameTab;
+
+  /// Action label for deleting a guitar tab.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete tab'**
+  String get deleteTab;
+
+  /// Tooltip for the action that appends a new beat/column to a guitar tab.
+  ///
+  /// In en, this message translates to:
+  /// **'Add beat'**
+  String get addBeatLabel;
+
+  /// Tooltip for the action that removes one beat/column from a guitar tab.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove beat'**
+  String get removeBeatLabel;
+
+  /// Title and field label for the dialog that sets a fret number on a tab string.
+  ///
+  /// In en, this message translates to:
+  /// **'Fret'**
+  String get fretDialogTitle;
+
+  /// Button label that clears a fret number back to unplayed.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get clearFretLabel;
+
+  /// Fretting-hand finger 1.
+  ///
+  /// In en, this message translates to:
+  /// **'Index'**
+  String get fingerIndexLabel;
+
+  /// Fretting-hand finger 2.
+  ///
+  /// In en, this message translates to:
+  /// **'Middle'**
+  String get fingerMiddleLabel;
+
+  /// Fretting-hand finger 3.
+  ///
+  /// In en, this message translates to:
+  /// **'Ring'**
+  String get fingerRingLabel;
+
+  /// Fretting-hand finger 4.
+  ///
+  /// In en, this message translates to:
+  /// **'Pinky'**
+  String get fingerPinkyLabel;
+
+  /// Fretting-hand finger 5.
+  ///
+  /// In en, this message translates to:
+  /// **'Thumb'**
+  String get fingerThumbLabel;
+
+  /// Toggle in the fret-editing dialog that enables the (otherwise grayed-out) finger picker.
+  ///
+  /// In en, this message translates to:
+  /// **'Assign finger'**
+  String get assignFingerToggleLabel;
+
+  /// Label for the tuning dropdown shown on a music form (tab, and later chord chart/notation).
+  ///
+  /// In en, this message translates to:
+  /// **'Tuning'**
+  String get tuningFieldLabel;
+
+  /// Standard guitar tuning preset label.
+  ///
+  /// In en, this message translates to:
+  /// **'E'**
+  String get tuningStandardLabel;
+
+  /// Half-step-down (E flat) guitar tuning preset label.
+  ///
+  /// In en, this message translates to:
+  /// **'E♭'**
+  String get tuningEFlatLabel;
+
+  /// Drop D guitar tuning preset label.
+  ///
+  /// In en, this message translates to:
+  /// **'Drop D'**
+  String get tuningDropDLabel;
 }
 
 class _AppLocalizationsDelegate

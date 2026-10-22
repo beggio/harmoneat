@@ -129,5 +129,81 @@
   "cloudStorageNoticeDontShowAgain": "Don't show this again",
   "@cloudStorageNoticeDontShowAgain": {
     "description": "Checkbox label in the cloud-storage acknowledgement dialog that suppresses future showings."
+  },
+  "tabsTabLabel": "Tabs",
+  "@tabsTabLabel": {
+    "description": "Tab label for a note's list of guitar tabs."
+  },
+  "tabsListEmpty": "No guitar tabs yet. Tap Tab in the toolbar to add one.",
+  "@tabsListEmpty": {
+    "description": "Shown when a note has no guitar tabs."
+  },
+  "untitledTabTitle": "Untitled tab",
+  "@untitledTabTitle": {
+    "description": "Default title shown for a guitar tab with no title."
+  },
+  "renameTab": "Rename tab",
+  "@renameTab": {
+    "description": "Action label for renaming a guitar tab."
+  },
+  "deleteTab": "Delete tab",
+  "@deleteTab": {
+    "description": "Action label for deleting a guitar tab."
+  },
+  "addBeatLabel": "Add beat",
+  "@addBeatLabel": {
+    "description": "Tooltip for the action that appends a new beat/column to a guitar tab."
+  },
+  "removeBeatLabel": "Remove beat",
+  "@removeBeatLabel": {
+    "description": "Tooltip for the action that removes one beat/column from a guitar tab."
+  },
+  "fretDialogTitle": "Fret",
+  "@fretDialogTitle": {
+    "description": "Title and field label for the dialog that sets a fret number on a tab string."
+  },
+  "clearFretLabel": "Clear",
+  "@clearFretLabel": {
+    "description": "Button label that clears a fret number back to unplayed."
+  },
+  "fingerIndexLabel": "Index",
+  "@fingerIndexLabel": {
+    "description": "Fretting-hand finger 1."
+  },
+  "fingerMiddleLabel": "Middle",
+  "@fingerMiddleLabel": {
+    "description": "Fretting-hand finger 2."
+  },
+  "fingerRingLabel": "Ring",
+  "@fingerRingLabel": {
+    "description": "Fretting-hand finger 3."
+  },
+  "fingerPinkyLabel": "Pinky",
+  "@fingerPinkyLabel": {
+    "description": "Fretting-hand finger 4."
+  },
+  "fingerThumbLabel": "Thumb",
+  "@fingerThumbLabel": {
+    "description": "Fretting-hand finger 5."
+  },
+  "assignFingerToggleLabel": "Assign finger",
+  "@assignFingerToggleLabel": {
+    "description": "Toggle in the fret-editing dialog that enables the (otherwise grayed-out) finger picker."
+  },
+  "tuningFieldLabel": "Tuning",
+  "@tuningFieldLabel": {
+    "description": "Label for the tuning dropdown shown on a music form (tab, and later chord chart/notation)."
+  },
+  "tuningStandardLabel": "E",
+  "@tuningStandardLabel": {
+    "description": "Standard guitar tuning preset label."
+  },
+  "tuningEFlatLabel": "E♭",
+  "@tuningEFlatLabel": {
+    "description": "Half-step-down (E flat) guitar tuning preset label."
+  },
+  "tuningDropDLabel": "Drop D",
+  "@tuningDropDLabel": {
+    "description": "Drop D guitar tuning preset label."
   }
 }
