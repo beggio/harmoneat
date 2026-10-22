@@ -187,3 +187,13 @@
   outlines. Selectable from Settings alongside Light/Dark High Contrast/Dark Modern/
   Urban Camo. Follow-up: made it the default scheme for new installs (previously
   Light), in `AppColorSchemeNotifier.build()` and its corrupt-data fallback.
+
+- **~~First packaged test distribution~~ (shipped 2026-10-22).** Added
+  `TESTER_README.md` (pre-production disclaimer, how to run it with no installer,
+  how to send feedback, what to try) and updated `scripts/build_beta.ps1` to bundle
+  it into the zip as `README.md` (staged in a temp folder first, so it doesn't end
+  up sitting in the actual Flutter build output directory). Ran the script to build
+  `dist/harmoneat-beta-20261022-132654.zip` (31.7MB, release Windows build with the
+  beta feedback/crash/usage system compiled in) and smoke-tested the extracted
+  `harmoneat.exe` standalone — launches and stays running outside of `flutter run`,
+  confirming the packaged build is actually viable, not just the dev-mode one.
