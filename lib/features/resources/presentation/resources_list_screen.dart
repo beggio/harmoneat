@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../app/app_logo_icon.dart';
 import '../../../l10n/app_localizations.dart';
 import 'all_chords_screen.dart';
 import 'circle_of_fifths_screen.dart';
@@ -14,7 +15,10 @@ class ResourcesListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.resourcesScreenTitle)),
+      appBar: AppBar(
+        leading: const AppLogoIcon(),
+        title: Text(l10n.resourcesScreenTitle),
+      ),
       body: ListView(
         children: [
           ListTile(

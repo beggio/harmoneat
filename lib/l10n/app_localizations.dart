@@ -424,6 +424,12 @@ abstract class AppLocalizations {
   /// **'Urban Camo'**
   String get colorSchemeUrbanCamoLabel;
 
+  /// Dark color scheme sampled directly from the app's own logo (navy background, cyan-to-gold gradient).
+  ///
+  /// In en, this message translates to:
+  /// **'HarmoNeat'**
+  String get colorSchemeHarmoNeatLabel;
+
   /// Tab label for a note's list of chord charts.
   ///
   /// In en, this message translates to:
@@ -789,6 +795,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Couldn\'t reach the server — saved locally instead.'**
   String get feedbackSavedLocallyMessage;
+
+  /// App version shown on the splash screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version}'**
+  String splashVersionLabel(String version);
+
+  /// Pre-production disclaimer shown on the splash screen.
+  ///
+  /// In en, this message translates to:
+  /// **'This is pre-production software under active development. Expect bugs, missing features, and changes between versions.'**
+  String get splashDisclaimerMessage;
+
+  /// Feedback request shown on the splash screen in a beta build, where the in-app feedback form exists.
+  ///
+  /// In en, this message translates to:
+  /// **'Found a bug or have feedback? Open Settings → Send Feedback to report it directly from the app.'**
+  String get splashFeedbackPromptBeta;
+
+  /// Feedback request shown on the splash screen outside a beta build, where there's no in-app feedback form yet.
+  ///
+  /// In en, this message translates to:
+  /// **'Found a bug or have feedback? Please let the developer know.'**
+  String get splashFeedbackPromptDefault;
+
+  /// Checkbox label on the splash screen that suppresses it for later launches of the same version.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t show this again for this version'**
+  String get splashDontShowAgainLabel;
+
+  /// Button label that dismisses the splash screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get splashContinueLabel;
 }
 
 class _AppLocalizationsDelegate

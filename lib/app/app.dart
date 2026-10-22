@@ -3,7 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../l10n/app_localizations.dart';
-import 'shell.dart';
+import 'splash_gate.dart';
 import 'theme.dart';
 
 class HarmoNeatApp extends ConsumerWidget {
@@ -34,7 +34,7 @@ class HarmoNeatApp extends ConsumerWidget {
           child: child!,
         );
       },
-      home: const AppShell(),
+      home: const SplashGate(),
     );
   }
 }

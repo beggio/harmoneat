@@ -178,6 +178,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get colorSchemeUrbanCamoLabel => 'Urban Camo';
 
   @override
+  String get colorSchemeHarmoNeatLabel => 'HarmoNeat';
+
+  @override
   String get chordChartsTabLabel => 'Chords';
 
   @override
@@ -376,4 +379,28 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get feedbackSavedLocallyMessage =>
       'Couldn\'t reach the server — saved locally instead.';
+
+  @override
+  String splashVersionLabel(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String get splashDisclaimerMessage =>
+      'This is pre-production software under active development. Expect bugs, missing features, and changes between versions.';
+
+  @override
+  String get splashFeedbackPromptBeta =>
+      'Found a bug or have feedback? Open Settings → Send Feedback to report it directly from the app.';
+
+  @override
+  String get splashFeedbackPromptDefault =>
+      'Found a bug or have feedback? Please let the developer know.';
+
+  @override
+  String get splashDontShowAgainLabel =>
+      'Don\'t show this again for this version';
+
+  @override
+  String get splashContinueLabel => 'Continue';
 }

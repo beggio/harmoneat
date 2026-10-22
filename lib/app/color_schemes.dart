@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 
-/// The four selectable appearance presets. `light` is the original
-/// seeded Material 3 scheme; the other three are hand-authored (not
-/// `ColorScheme.fromSeed`) because high-contrast and camo palettes need
-/// specific, deliberately-chosen tones rather than a single seed color's
-/// tonal derivation.
-enum AppColorScheme { light, darkHighContrast, darkModern, urbanCamo }
+/// The five selectable appearance presets. `light` is the original
+/// seeded Material 3 scheme; the rest are hand-authored (not
+/// `ColorScheme.fromSeed`) because high-contrast, camo, and the
+/// logo-derived palette need specific, deliberately-chosen tones rather
+/// than a single seed color's tonal derivation.
+enum AppColorScheme {
+  light,
+  darkHighContrast,
+  darkModern,
+  urbanCamo,
+  harmoNeat,
+}
 
 ColorScheme colorSchemeFor(AppColorScheme scheme) {
   switch (scheme) {
@@ -63,6 +69,24 @@ ColorScheme colorSchemeFor(AppColorScheme scheme) {
         surfaceContainerHighest: Color(0xFF3B3C30),
         outline: Color(0xFF6B6B4F),
         outlineVariant: Color(0xFF4B4B3A),
+      );
+    case AppColorScheme.harmoNeat:
+      // Sampled directly from the app's own logo (assets/IMG_1579.png):
+      // its dark navy background, the cyan-to-gold gradient of the
+      // swirl/treble-clef mark, and its white wordmark text.
+      return const ColorScheme(
+        brightness: Brightness.dark,
+        primary: Color(0xFF2ED3DF),
+        onPrimary: Color(0xFF06262B),
+        secondary: Color(0xFFF9DB93),
+        onSecondary: Color(0xFF3A2E0A),
+        error: Color(0xFFFF8A80),
+        onError: Color(0xFF4E0002),
+        surface: Color(0xFF0A0F1A),
+        onSurface: Color(0xFFECEFF4),
+        surfaceContainerHighest: Color(0xFF141B2A),
+        outline: Color(0xFF3F9A9B),
+        outlineVariant: Color(0xFF243244),
       );
   }
 }

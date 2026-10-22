@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:harmoneat/app/app.dart';
+import 'package:harmoneat/app/app_version_provider.dart';
 import 'package:harmoneat/data/database/database.dart';
 import 'package:harmoneat/data/providers.dart';
 import 'package:harmoneat/data/repositories/attachments_repository.dart';
@@ -131,10 +132,18 @@ void main() {
           attachmentsRepositoryProvider.overrideWithValue(
             _FakeAttachmentsRepository(),
           ),
+          // Avoids package_info_plus's platform channel, which has no
+          // response in a widget test.
+          appVersionProvider.overrideWith((ref) => '1.0.0+1'),
         ],
         child: const HarmoNeatApp(),
       ),
     );
+    await tester.pumpAndSettle();
+
+    // The splash screen is in front of everything on a version that
+    // hasn't been seen before (which, in a fresh test, is every time).
+    await tester.tap(find.text('Continue'));
     await tester.pumpAndSettle();
 
     expect(find.text('No notes yet. Tap + to create one.'), findsOneWidget);

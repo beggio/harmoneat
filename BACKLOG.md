@@ -148,3 +148,42 @@
   `BETA_TESTING.md`. Tests lock in that the whole system is genuinely inert without
   the build flag (`test/beta/beta_gating_test.dart`): no network calls, no counter
   writes.
+
+- **~~Splash screen (app name/version, pre-production disclaimer, feedback
+  instructions) on launch~~ (shipped 2026-10-22).** `SplashGate`
+  (`lib/app/splash_gate.dart`) sits in front of `AppShell` as the app's `home`:
+  compares the installed version (`app_version_provider.dart`, via
+  `package_info_plus`) against the last version the splash was suppressed for
+  (`splashAcknowledgedVersionProvider` in `theme.dart`, persisted). It always shows at
+  least once per version; a "don't show this again for this version" checkbox
+  (default checked) suppresses it for *later* launches of that same version only — a
+  new version always shows it again regardless of a prior suppression. Feedback
+  instructions on the splash point to Settings → Send Feedback in a beta build, or a
+  generic message otherwise, since that button doesn't exist outside one. Covered by
+  `test/app/splash_acknowledged_version_test.dart`; `test/widget_test.dart` updated to
+  dismiss the splash before asserting on the notes list.
+
+- **~~Real logo in the splash screen and a small version in the app headers~~ (shipped
+  2026-10-22).** The user provided the HarmoNeat wordmark logo as PNG/GIF/TIFF
+  exports; used the PNG (the only one of the three Flutter's image decoder actually
+  supports — TIFF isn't decodable at all, GIF would've meant a lossy 256-color
+  palette for a smooth gradient mark). Generated `assets/images/logo_icon.png` by
+  cropping just the swirl/treble-clef mark out of the full wordmark (excluding the
+  "HarmoNeat"/"Caporio Software" text, illegible at header-icon size) with a one-off
+  script using the `image` pub package, added as a leading icon on the Notes/
+  Resources/Settings AppBars (`AppLogoIcon`, `lib/app/app_logo_icon.dart`) — removed
+  the script and temporary dependency once the crop looked right. Follow-up: the user
+  then added an animated GIF version of the logo reveal
+  (`assets/images/splash_animation.gif`); swapped it in as the splash screen's hero
+  image in place of the static PNG — Flutter's `Image` widget animates multi-frame
+  GIFs with no extra plumbing needed.
+
+- **~~"HarmoNeat" color scheme, derived from the logo's own palette~~ (shipped
+  2026-10-22).** Added a 5th `AppColorScheme` (`lib/app/color_schemes.dart`) sampled
+  directly from pixel colors in the logo artwork (via a one-off script, removed after)
+  rather than eyeballed: dark navy background (`#0A0F1A`), the swirl's cyan
+  (`#2ED3DF`) as primary and its gold (`#F9DB93`) as secondary, near-white text
+  (`#ECEFF4`), with a muted teal (`#3F9A9B`) sampled from the swirl itself for
+  outlines. Selectable from Settings alongside Light/Dark High Contrast/Dark Modern/
+  Urban Camo. Follow-up: made it the default scheme for new installs (previously
+  Light), in `AppColorSchemeNotifier.build()` and its corrupt-data fallback.

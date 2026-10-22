@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../app/app_logo_icon.dart';
 import '../../../beta/beta_config.dart';
 import '../../../beta/usage_tracker.dart';
 import '../../../data/database/database.dart';
@@ -18,7 +19,10 @@ class NotesListScreen extends ConsumerWidget {
     final notesAsync = ref.watch(notesListProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.notesListTitle)),
+      appBar: AppBar(
+        leading: const AppLogoIcon(),
+        title: Text(l10n.notesListTitle),
+      ),
       body: notesAsync.when(
         data: (notes) {
           if (notes.isEmpty) {

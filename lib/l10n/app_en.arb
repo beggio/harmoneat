@@ -225,6 +225,10 @@
   "@colorSchemeUrbanCamoLabel": {
     "description": "A camouflage-inspired olive/khaki/tan dark color scheme."
   },
+  "colorSchemeHarmoNeatLabel": "HarmoNeat",
+  "@colorSchemeHarmoNeatLabel": {
+    "description": "Dark color scheme sampled directly from the app's own logo (navy background, cyan-to-gold gradient)."
+  },
   "chordChartsTabLabel": "Chords",
   "@chordChartsTabLabel": {
     "description": "Tab label for a note's list of chord charts."
@@ -499,5 +503,34 @@
   "feedbackSavedLocallyMessage": "Couldn't reach the server — saved locally instead.",
   "@feedbackSavedLocallyMessage": {
     "description": "Shown when feedback couldn't be sent and was saved to a local log file instead."
+  },
+  "splashVersionLabel": "Version {version}",
+  "@splashVersionLabel": {
+    "description": "App version shown on the splash screen.",
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "splashDisclaimerMessage": "This is pre-production software under active development. Expect bugs, missing features, and changes between versions.",
+  "@splashDisclaimerMessage": {
+    "description": "Pre-production disclaimer shown on the splash screen."
+  },
+  "splashFeedbackPromptBeta": "Found a bug or have feedback? Open Settings → Send Feedback to report it directly from the app.",
+  "@splashFeedbackPromptBeta": {
+    "description": "Feedback request shown on the splash screen in a beta build, where the in-app feedback form exists."
+  },
+  "splashFeedbackPromptDefault": "Found a bug or have feedback? Please let the developer know.",
+  "@splashFeedbackPromptDefault": {
+    "description": "Feedback request shown on the splash screen outside a beta build, where there's no in-app feedback form yet."
+  },
+  "splashDontShowAgainLabel": "Don't show this again for this version",
+  "@splashDontShowAgainLabel": {
+    "description": "Checkbox label on the splash screen that suppresses it for later launches of the same version."
+  },
+  "splashContinueLabel": "Continue",
+  "@splashContinueLabel": {
+    "description": "Button label that dismisses the splash screen."
   }
 }

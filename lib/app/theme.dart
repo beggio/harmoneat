@@ -9,6 +9,7 @@ const _colorSchemeKey = 'appColorScheme';
 const _textScaleKey = 'textScale';
 const _localeKey = 'locale';
 const _cloudStorageAcknowledgedKey = 'cloudStorageAcknowledged';
+const _splashAcknowledgedVersionKey = 'splashAcknowledgedVersion';
 
 /// Simple user preferences (appearance, text scale, locale) belong here,
 /// not in Drift — they're prefs, not structured musical data. The Settings
@@ -22,7 +23,7 @@ class AppColorSchemeNotifier extends Notifier<AppColorScheme> {
   @override
   AppColorScheme build() {
     _load();
-    return AppColorScheme.light;
+    return AppColorScheme.harmoNeat;
   }
 
   Future<void> _load() async {
@@ -31,7 +32,7 @@ class AppColorSchemeNotifier extends Notifier<AppColorScheme> {
     if (stored != null) {
       state = AppColorScheme.values.firstWhere(
         (s) => s.name == stored,
-        orElse: () => AppColorScheme.light,
+        orElse: () => AppColorScheme.harmoNeat,
       );
     }
   }
@@ -130,6 +131,35 @@ class CloudStorageAcknowledgedNotifier extends Notifier<bool> {
 final cloudStorageAcknowledgedProvider =
     NotifierProvider<CloudStorageAcknowledgedNotifier, bool>(
       CloudStorageAcknowledgedNotifier.new,
+    );
+
+/// The app version the splash screen was last dismissed-and-suppressed
+/// for (`"don't show again for this version"`), or `null` if it's never
+/// been suppressed. The splash always shows at least once per version —
+/// this only controls whether it shows *again* on later launches of that
+/// same version.
+class SplashAcknowledgedVersionNotifier extends Notifier<String?> {
+  @override
+  String? build() {
+    _load();
+    return null;
+  }
+
+  Future<void> _load() async {
+    final prefs = await ref.read(sharedPreferencesProvider.future);
+    state = prefs.getString(_splashAcknowledgedVersionKey);
+  }
+
+  Future<void> acknowledge(String version) async {
+    state = version;
+    final prefs = await ref.read(sharedPreferencesProvider.future);
+    await prefs.setString(_splashAcknowledgedVersionKey, version);
+  }
+}
+
+final splashAcknowledgedVersionProvider =
+    NotifierProvider<SplashAcknowledgedVersionNotifier, String?>(
+      SplashAcknowledgedVersionNotifier.new,
     );
 
 /// Stand-in for Andale Mono, which is a licensed Monotype font Flutter

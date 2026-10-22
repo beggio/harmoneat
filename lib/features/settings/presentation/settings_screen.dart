@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../app/app_logo_icon.dart';
 import '../../../app/color_schemes.dart';
 import '../../../app/theme.dart';
 import '../../../beta/beta_config.dart';
@@ -23,10 +24,14 @@ class SettingsScreen extends ConsumerWidget {
       AppColorScheme.darkHighContrast: l10n.colorSchemeDarkHighContrastLabel,
       AppColorScheme.darkModern: l10n.colorSchemeDarkModernLabel,
       AppColorScheme.urbanCamo: l10n.colorSchemeUrbanCamoLabel,
+      AppColorScheme.harmoNeat: l10n.colorSchemeHarmoNeatLabel,
     };
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.settingsScreenTitle)),
+      appBar: AppBar(
+        leading: const AppLogoIcon(),
+        title: Text(l10n.settingsScreenTitle),
+      ),
       body: ListView(
         children: [
           SwitchListTile(
