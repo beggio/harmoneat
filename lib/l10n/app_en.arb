@@ -100,15 +100,6 @@
   "@notationButtonLabel": {
     "description": "Label for the toolbar button that creates a new standard notation sheet."
   },
-  "comingSoonMessage": "The {feature} editor isn't built yet — this button is a placeholder.",
-  "@comingSoonMessage": {
-    "description": "Shown on a stub screen for a toolbar action whose editor hasn't been implemented yet.",
-    "placeholders": {
-      "feature": {
-        "type": "String"
-      }
-    }
-  },
   "cloudStorageNoticeTitle": "Audio files may sync to the cloud",
   "@cloudStorageNoticeTitle": {
     "description": "Title of the one-time dialog warning that recordings/imports land in a cloud-synced folder."
@@ -299,5 +290,89 @@
         "type": "int"
       }
     }
+  },
+  "notationSheetsTabLabel": "Notation",
+  "@notationSheetsTabLabel": {
+    "description": "Tab label for a note's list of standard notation sheets."
+  },
+  "notationSheetsListEmpty": "No notation sheets yet. Tap Notation in the toolbar to add one.",
+  "@notationSheetsListEmpty": {
+    "description": "Shown when a note has no notation sheets."
+  },
+  "untitledNotationSheetTitle": "Untitled sheet",
+  "@untitledNotationSheetTitle": {
+    "description": "Default title shown for a notation sheet with no title."
+  },
+  "renameNotationSheet": "Rename sheet",
+  "@renameNotationSheet": {
+    "description": "Action label for renaming a notation sheet."
+  },
+  "deleteNotationSheet": "Delete sheet",
+  "@deleteNotationSheet": {
+    "description": "Action label for deleting a notation sheet."
+  },
+  "addNoteEventLabel": "Add note",
+  "@addNoteEventLabel": {
+    "description": "Tooltip for the action that appends a new note/rest to a notation sheet."
+  },
+  "removeNoteEventLabel": "Remove note",
+  "@removeNoteEventLabel": {
+    "description": "Tooltip for the action that removes one note/rest from a notation sheet."
+  },
+  "timeSignatureLabel": "Time signature",
+  "@timeSignatureLabel": {
+    "description": "Label for the time-signature selector on a notation sheet."
+  },
+  "restToggleLabel": "Rest",
+  "@restToggleLabel": {
+    "description": "Toggle in the note-editing dialog that makes this event a rest instead of a pitched note."
+  },
+  "pitchLetterLabel": "Letter",
+  "@pitchLetterLabel": {
+    "description": "Label for the pitch-letter dropdown (A-G) in the note-editing dialog."
+  },
+  "accidentalLabel": "Accidental",
+  "@accidentalLabel": {
+    "description": "Label for the accidental dropdown in the note-editing dialog."
+  },
+  "accidentalFlatLabel": "Flat",
+  "@accidentalFlatLabel": {
+    "description": "Flat accidental option."
+  },
+  "accidentalNaturalLabel": "Natural",
+  "@accidentalNaturalLabel": {
+    "description": "No-accidental option."
+  },
+  "accidentalSharpLabel": "Sharp",
+  "@accidentalSharpLabel": {
+    "description": "Sharp accidental option."
+  },
+  "octaveLabel": "Octave",
+  "@octaveLabel": {
+    "description": "Label for the octave stepper in the note-editing dialog."
+  },
+  "durationWholeLabel": "Whole",
+  "@durationWholeLabel": {
+    "description": "Whole-note duration option."
+  },
+  "durationHalfLabel": "Half",
+  "@durationHalfLabel": {
+    "description": "Half-note duration option."
+  },
+  "durationQuarterLabel": "Quarter",
+  "@durationQuarterLabel": {
+    "description": "Quarter-note duration option."
+  },
+  "durationEighthLabel": "Eighth",
+  "@durationEighthLabel": {
+    "description": "Eighth-note duration option."
+  },
+  "dottedLabel": "Dotted",
+  "@dottedLabel": {
+    "description": "Toggle for a dotted (1.5x length) note/rest in the note-editing dialog."
+  },
+  "noteEventDialogTitle": "Note",
+  "@noteEventDialogTitle": {
+    "description": "Title for the dialog that edits one note/rest on a notation sheet."
   }
 }

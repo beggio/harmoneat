@@ -5,6 +5,7 @@ import 'database/database.dart';
 import 'repositories/attachments_repository.dart';
 import 'repositories/chord_charts_repository.dart';
 import 'repositories/guitar_tabs_repository.dart';
+import 'repositories/notation_sheets_repository.dart';
 import 'repositories/notes_repository.dart';
 
 final appDirectoriesProvider = Provider<AppDirectories>(
@@ -37,4 +38,10 @@ final guitarTabsRepositoryProvider = Provider<GuitarTabsRepository>((ref) {
 
 final chordChartsRepositoryProvider = Provider<ChordChartsRepository>((ref) {
   return ChordChartsRepository(ref.watch(appDatabaseProvider));
+});
+
+final notationSheetsRepositoryProvider = Provider<NotationSheetsRepository>((
+  ref,
+) {
+  return NotationSheetsRepository(ref.watch(appDatabaseProvider));
 });

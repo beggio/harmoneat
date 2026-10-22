@@ -5,6 +5,7 @@ import '../../../data/providers.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../audio/presentation/attachments_tab.dart';
 import '../../chord/presentation/chord_charts_list_tab.dart';
+import '../../notation/presentation/notation_sheets_list_tab.dart';
 import '../../tab/presentation/tabs_list_tab.dart';
 import '../application/note_detail_provider.dart';
 import 'note_body_tab.dart';
@@ -30,7 +31,7 @@ class NoteDetailScreen extends ConsumerWidget {
         }
         final title = note.title.isEmpty ? l10n.untitledNote : note.title;
         return DefaultTabController(
-          length: 4,
+          length: 5,
           child: Scaffold(
             appBar: AppBar(
               title: Text(title),
@@ -47,6 +48,7 @@ class NoteDetailScreen extends ConsumerWidget {
                   Tab(text: l10n.attachmentsTabLabel),
                   Tab(text: l10n.tabsTabLabel),
                   Tab(text: l10n.chordChartsTabLabel),
+                  Tab(text: l10n.notationSheetsTabLabel),
                 ],
               ),
             ),
@@ -60,6 +62,7 @@ class NoteDetailScreen extends ConsumerWidget {
                       AttachmentsTab(noteId: note.id),
                       TabsListTab(noteId: note.id),
                       ChordChartsListTab(noteId: note.id),
+                      NotationSheetsListTab(noteId: note.id),
                     ],
                   ),
                 ),

@@ -2534,6 +2534,459 @@ class ChordChartsCompanion extends UpdateCompanion<ChordChart> {
   }
 }
 
+class $NotationSheetsTable extends NotationSheets
+    with TableInfo<$NotationSheetsTable, NotationSheet> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $NotationSheetsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _partIdMeta = const VerificationMeta('partId');
+  @override
+  late final GeneratedColumn<String> partId = GeneratedColumn<String>(
+    'part_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES parts (id)',
+    ),
+  );
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
+  @override
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+    'title',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _positionMeta = const VerificationMeta(
+    'position',
+  );
+  @override
+  late final GeneratedColumn<int> position = GeneratedColumn<int>(
+    'position',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _dataMeta = const VerificationMeta('data');
+  @override
+  late final GeneratedColumn<String> data = GeneratedColumn<String>(
+    'data',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    partId,
+    title,
+    position,
+    data,
+    createdAt,
+    updatedAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'notation_sheets';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<NotationSheet> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('part_id')) {
+      context.handle(
+        _partIdMeta,
+        partId.isAcceptableOrUnknown(data['part_id']!, _partIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_partIdMeta);
+    }
+    if (data.containsKey('title')) {
+      context.handle(
+        _titleMeta,
+        title.isAcceptableOrUnknown(data['title']!, _titleMeta),
+      );
+    }
+    if (data.containsKey('position')) {
+      context.handle(
+        _positionMeta,
+        position.isAcceptableOrUnknown(data['position']!, _positionMeta),
+      );
+    }
+    if (data.containsKey('data')) {
+      context.handle(
+        _dataMeta,
+        this.data.isAcceptableOrUnknown(data['data']!, _dataMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dataMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_updatedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  NotationSheet map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return NotationSheet(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      partId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}part_id'],
+      )!,
+      title: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}title'],
+      ),
+      position: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}position'],
+      )!,
+      data: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}data'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+    );
+  }
+
+  @override
+  $NotationSheetsTable createAlias(String alias) {
+    return $NotationSheetsTable(attachedDatabase, alias);
+  }
+}
+
+class NotationSheet extends DataClass implements Insertable<NotationSheet> {
+  final String id;
+  final String partId;
+  final String? title;
+  final int position;
+  final String data;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  const NotationSheet({
+    required this.id,
+    required this.partId,
+    this.title,
+    required this.position,
+    required this.data,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['part_id'] = Variable<String>(partId);
+    if (!nullToAbsent || title != null) {
+      map['title'] = Variable<String>(title);
+    }
+    map['position'] = Variable<int>(position);
+    map['data'] = Variable<String>(data);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    return map;
+  }
+
+  NotationSheetsCompanion toCompanion(bool nullToAbsent) {
+    return NotationSheetsCompanion(
+      id: Value(id),
+      partId: Value(partId),
+      title: title == null && nullToAbsent
+          ? const Value.absent()
+          : Value(title),
+      position: Value(position),
+      data: Value(data),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+    );
+  }
+
+  factory NotationSheet.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return NotationSheet(
+      id: serializer.fromJson<String>(json['id']),
+      partId: serializer.fromJson<String>(json['partId']),
+      title: serializer.fromJson<String?>(json['title']),
+      position: serializer.fromJson<int>(json['position']),
+      data: serializer.fromJson<String>(json['data']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'partId': serializer.toJson<String>(partId),
+      'title': serializer.toJson<String?>(title),
+      'position': serializer.toJson<int>(position),
+      'data': serializer.toJson<String>(data),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+    };
+  }
+
+  NotationSheet copyWith({
+    String? id,
+    String? partId,
+    Value<String?> title = const Value.absent(),
+    int? position,
+    String? data,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) => NotationSheet(
+    id: id ?? this.id,
+    partId: partId ?? this.partId,
+    title: title.present ? title.value : this.title,
+    position: position ?? this.position,
+    data: data ?? this.data,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+  );
+  NotationSheet copyWithCompanion(NotationSheetsCompanion data) {
+    return NotationSheet(
+      id: data.id.present ? data.id.value : this.id,
+      partId: data.partId.present ? data.partId.value : this.partId,
+      title: data.title.present ? data.title.value : this.title,
+      position: data.position.present ? data.position.value : this.position,
+      data: data.data.present ? data.data.value : this.data,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('NotationSheet(')
+          ..write('id: $id, ')
+          ..write('partId: $partId, ')
+          ..write('title: $title, ')
+          ..write('position: $position, ')
+          ..write('data: $data, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, partId, title, position, data, createdAt, updatedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is NotationSheet &&
+          other.id == this.id &&
+          other.partId == this.partId &&
+          other.title == this.title &&
+          other.position == this.position &&
+          other.data == this.data &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt);
+}
+
+class NotationSheetsCompanion extends UpdateCompanion<NotationSheet> {
+  final Value<String> id;
+  final Value<String> partId;
+  final Value<String?> title;
+  final Value<int> position;
+  final Value<String> data;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<int> rowid;
+  const NotationSheetsCompanion({
+    this.id = const Value.absent(),
+    this.partId = const Value.absent(),
+    this.title = const Value.absent(),
+    this.position = const Value.absent(),
+    this.data = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  NotationSheetsCompanion.insert({
+    required String id,
+    required String partId,
+    this.title = const Value.absent(),
+    this.position = const Value.absent(),
+    required String data,
+    required DateTime createdAt,
+    required DateTime updatedAt,
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       partId = Value(partId),
+       data = Value(data),
+       createdAt = Value(createdAt),
+       updatedAt = Value(updatedAt);
+  static Insertable<NotationSheet> custom({
+    Expression<String>? id,
+    Expression<String>? partId,
+    Expression<String>? title,
+    Expression<int>? position,
+    Expression<String>? data,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (partId != null) 'part_id': partId,
+      if (title != null) 'title': title,
+      if (position != null) 'position': position,
+      if (data != null) 'data': data,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  NotationSheetsCompanion copyWith({
+    Value<String>? id,
+    Value<String>? partId,
+    Value<String?>? title,
+    Value<int>? position,
+    Value<String>? data,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? rowid,
+  }) {
+    return NotationSheetsCompanion(
+      id: id ?? this.id,
+      partId: partId ?? this.partId,
+      title: title ?? this.title,
+      position: position ?? this.position,
+      data: data ?? this.data,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (partId.present) {
+      map['part_id'] = Variable<String>(partId.value);
+    }
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
+    }
+    if (position.present) {
+      map['position'] = Variable<int>(position.value);
+    }
+    if (data.present) {
+      map['data'] = Variable<String>(data.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('NotationSheetsCompanion(')
+          ..write('id: $id, ')
+          ..write('partId: $partId, ')
+          ..write('title: $title, ')
+          ..write('position: $position, ')
+          ..write('data: $data, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -2543,6 +2996,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $PartsTable parts = $PartsTable(this);
   late final $GuitarTabsTable guitarTabs = $GuitarTabsTable(this);
   late final $ChordChartsTable chordCharts = $ChordChartsTable(this);
+  late final $NotationSheetsTable notationSheets = $NotationSheetsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2554,6 +3008,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     parts,
     guitarTabs,
     chordCharts,
+    notationSheets,
   ];
 }
 
@@ -3716,6 +4171,24 @@ final class $$PartsTableReferences
       manager.$state.copyWith(prefetchedData: cache),
     );
   }
+
+  static MultiTypedResultKey<$NotationSheetsTable, List<NotationSheet>>
+  _notationSheetsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.notationSheets,
+    aliasName: 'parts__id__notation_sheets__part_id',
+  );
+
+  $$NotationSheetsTableProcessedTableManager get notationSheetsRefs {
+    final manager = $$NotationSheetsTableTableManager(
+      $_db,
+      $_db.notationSheets,
+    ).filter((f) => f.partId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_notationSheetsRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
 }
 
 class $$PartsTableFilterComposer extends Composer<_$AppDatabase, $PartsTable> {
@@ -3828,6 +4301,31 @@ class $$PartsTableFilterComposer extends Composer<_$AppDatabase, $PartsTable> {
           }) => $$ChordChartsTableFilterComposer(
             $db: $db,
             $table: $db.chordCharts,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> notationSheetsRefs(
+    Expression<bool> Function($$NotationSheetsTableFilterComposer f) f,
+  ) {
+    final $$NotationSheetsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.notationSheets,
+      getReferencedColumn: (t) => t.partId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$NotationSheetsTableFilterComposer(
+            $db: $db,
+            $table: $db.notationSheets,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -4022,6 +4520,31 @@ class $$PartsTableAnnotationComposer
     );
     return f(composer);
   }
+
+  Expression<T> notationSheetsRefs<T extends Object>(
+    Expression<T> Function($$NotationSheetsTableAnnotationComposer a) f,
+  ) {
+    final $$NotationSheetsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.notationSheets,
+      getReferencedColumn: (t) => t.partId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$NotationSheetsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.notationSheets,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
 }
 
 class $$PartsTableTableManager
@@ -4042,6 +4565,7 @@ class $$PartsTableTableManager
             bool instrumentId,
             bool guitarTabsRefs,
             bool chordChartsRefs,
+            bool notationSheetsRefs,
           })
         > {
   $$PartsTableTableManager(_$AppDatabase db, $PartsTable table)
@@ -4101,12 +4625,14 @@ class $$PartsTableTableManager
                 instrumentId = false,
                 guitarTabsRefs = false,
                 chordChartsRefs = false,
+                notationSheetsRefs = false,
               }) {
                 return PrefetchHooks(
                   db: db,
                   explicitlyWatchedTables: [
                     if (guitarTabsRefs) db.guitarTabs,
                     if (chordChartsRefs) db.chordCharts,
+                    if (notationSheetsRefs) db.notationSheets,
                   ],
                   addJoins:
                       <
@@ -4189,6 +4715,27 @@ class $$PartsTableTableManager
                               ),
                           typedResults: items,
                         ),
+                      if (notationSheetsRefs)
+                        await $_getPrefetchedData<
+                          Part,
+                          $PartsTable,
+                          NotationSheet
+                        >(
+                          currentTable: table,
+                          referencedTable: $$PartsTableReferences
+                              ._notationSheetsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$PartsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).notationSheetsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.partId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
                     ];
                   },
                 );
@@ -4214,6 +4761,7 @@ typedef $$PartsTableProcessedTableManager =
         bool instrumentId,
         bool guitarTabsRefs,
         bool chordChartsRefs,
+        bool notationSheetsRefs,
       })
     >;
 typedef $$GuitarTabsTableCreateCompanionBuilder = GuitarTabsCompanion Function({
@@ -4920,6 +5468,365 @@ typedef $$ChordChartsTableProcessedTableManager =
       ChordChart,
       PrefetchHooks Function({bool partId})
     >;
+typedef $$NotationSheetsTableCreateCompanionBuilder =
+    NotationSheetsCompanion Function({
+      required String id,
+      required String partId,
+      Value<String?> title,
+      Value<int> position,
+      required String data,
+      required DateTime createdAt,
+      required DateTime updatedAt,
+      Value<int> rowid,
+    });
+typedef $$NotationSheetsTableUpdateCompanionBuilder =
+    NotationSheetsCompanion Function({
+      Value<String> id,
+      Value<String> partId,
+      Value<String?> title,
+      Value<int> position,
+      Value<String> data,
+      Value<DateTime> createdAt,
+      Value<DateTime> updatedAt,
+      Value<int> rowid,
+    });
+
+final class $$NotationSheetsTableReferences
+    extends BaseReferences<_$AppDatabase, $NotationSheetsTable, NotationSheet> {
+  $$NotationSheetsTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static $PartsTable _partIdTable(_$AppDatabase db) =>
+      db.parts.createAlias('notation_sheets__part_id__parts__id');
+
+  $$PartsTableProcessedTableManager get partId {
+    final $_column = $_itemColumn<String>('part_id')!;
+
+    final manager = $$PartsTableTableManager(
+      $_db,
+      $_db.parts,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_partIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$NotationSheetsTableFilterComposer
+    extends Composer<_$AppDatabase, $NotationSheetsTable> {
+  $$NotationSheetsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get title => $composableBuilder(
+    column: $table.title,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get position => $composableBuilder(
+    column: $table.position,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get data => $composableBuilder(
+    column: $table.data,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$PartsTableFilterComposer get partId {
+    final $$PartsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.partId,
+      referencedTable: $db.parts,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PartsTableFilterComposer(
+            $db: $db,
+            $table: $db.parts,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$NotationSheetsTableOrderingComposer
+    extends Composer<_$AppDatabase, $NotationSheetsTable> {
+  $$NotationSheetsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get title => $composableBuilder(
+    column: $table.title,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get position => $composableBuilder(
+    column: $table.position,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get data => $composableBuilder(
+    column: $table.data,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$PartsTableOrderingComposer get partId {
+    final $$PartsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.partId,
+      referencedTable: $db.parts,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PartsTableOrderingComposer(
+            $db: $db,
+            $table: $db.parts,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$NotationSheetsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $NotationSheetsTable> {
+  $$NotationSheetsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get title =>
+      $composableBuilder(column: $table.title, builder: (column) => column);
+
+  GeneratedColumn<int> get position =>
+      $composableBuilder(column: $table.position, builder: (column) => column);
+
+  GeneratedColumn<String> get data =>
+      $composableBuilder(column: $table.data, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+
+  $$PartsTableAnnotationComposer get partId {
+    final $$PartsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.partId,
+      referencedTable: $db.parts,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PartsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.parts,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$NotationSheetsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $NotationSheetsTable,
+          NotationSheet,
+          $$NotationSheetsTableFilterComposer,
+          $$NotationSheetsTableOrderingComposer,
+          $$NotationSheetsTableAnnotationComposer,
+          $$NotationSheetsTableCreateCompanionBuilder,
+          $$NotationSheetsTableUpdateCompanionBuilder,
+          (NotationSheet, $$NotationSheetsTableReferences),
+          NotationSheet,
+          PrefetchHooks Function({bool partId})
+        > {
+  $$NotationSheetsTableTableManager(
+    _$AppDatabase db,
+    $NotationSheetsTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$NotationSheetsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$NotationSheetsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$NotationSheetsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> partId = const Value.absent(),
+                Value<String?> title = const Value.absent(),
+                Value<int> position = const Value.absent(),
+                Value<String> data = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<DateTime> updatedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => NotationSheetsCompanion(
+                id: id,
+                partId: partId,
+                title: title,
+                position: position,
+                data: data,
+                createdAt: createdAt,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String partId,
+                Value<String?> title = const Value.absent(),
+                Value<int> position = const Value.absent(),
+                required String data,
+                required DateTime createdAt,
+                required DateTime updatedAt,
+                Value<int> rowid = const Value.absent(),
+              }) => NotationSheetsCompanion.insert(
+                id: id,
+                partId: partId,
+                title: title,
+                position: position,
+                data: data,
+                createdAt: createdAt,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$NotationSheetsTable, NotationSheet>(table),
+                  $$NotationSheetsTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({partId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (partId) {
+                      state = state.withJoin(
+                        currentTable: table,
+                        currentColumn: table.partId,
+                        referencedTable: $$NotationSheetsTableReferences
+                            ._partIdTable(db),
+                        referencedColumn: $$NotationSheetsTableReferences
+                            ._partIdTable(db)
+                            .id,
+                      ) as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$NotationSheetsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $NotationSheetsTable,
+      NotationSheet,
+      $$NotationSheetsTableFilterComposer,
+      $$NotationSheetsTableOrderingComposer,
+      $$NotationSheetsTableAnnotationComposer,
+      $$NotationSheetsTableCreateCompanionBuilder,
+      $$NotationSheetsTableUpdateCompanionBuilder,
+      (NotationSheet, $$NotationSheetsTableReferences),
+      NotationSheet,
+      PrefetchHooks Function({bool partId})
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -4936,4 +5843,6 @@ class $AppDatabaseManager {
       $$GuitarTabsTableTableManager(_db, _db.guitarTabs);
   $$ChordChartsTableTableManager get chordCharts =>
       $$ChordChartsTableTableManager(_db, _db.chordCharts);
+  $$NotationSheetsTableTableManager get notationSheets =>
+      $$NotationSheetsTableTableManager(_db, _db.notationSheets);
 }

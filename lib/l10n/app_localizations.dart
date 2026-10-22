@@ -244,12 +244,6 @@ abstract class AppLocalizations {
   /// **'Notation'**
   String get notationButtonLabel;
 
-  /// Shown on a stub screen for a toolbar action whose editor hasn't been implemented yet.
-  ///
-  /// In en, this message translates to:
-  /// **'The {feature} editor isn\'t built yet — this button is a placeholder.'**
-  String comingSoonMessage(String feature);
-
   /// Title of the one-time dialog warning that recordings/imports land in a cloud-synced folder.
   ///
   /// In en, this message translates to:
@@ -513,6 +507,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{fret}fr'**
   String baseFretButtonLabel(int fret);
+
+  /// Tab label for a note's list of standard notation sheets.
+  ///
+  /// In en, this message translates to:
+  /// **'Notation'**
+  String get notationSheetsTabLabel;
+
+  /// Shown when a note has no notation sheets.
+  ///
+  /// In en, this message translates to:
+  /// **'No notation sheets yet. Tap Notation in the toolbar to add one.'**
+  String get notationSheetsListEmpty;
+
+  /// Default title shown for a notation sheet with no title.
+  ///
+  /// In en, this message translates to:
+  /// **'Untitled sheet'**
+  String get untitledNotationSheetTitle;
+
+  /// Action label for renaming a notation sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Rename sheet'**
+  String get renameNotationSheet;
+
+  /// Action label for deleting a notation sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete sheet'**
+  String get deleteNotationSheet;
+
+  /// Tooltip for the action that appends a new note/rest to a notation sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Add note'**
+  String get addNoteEventLabel;
+
+  /// Tooltip for the action that removes one note/rest from a notation sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove note'**
+  String get removeNoteEventLabel;
+
+  /// Label for the time-signature selector on a notation sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Time signature'**
+  String get timeSignatureLabel;
+
+  /// Toggle in the note-editing dialog that makes this event a rest instead of a pitched note.
+  ///
+  /// In en, this message translates to:
+  /// **'Rest'**
+  String get restToggleLabel;
+
+  /// Label for the pitch-letter dropdown (A-G) in the note-editing dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'Letter'**
+  String get pitchLetterLabel;
+
+  /// Label for the accidental dropdown in the note-editing dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'Accidental'**
+  String get accidentalLabel;
+
+  /// Flat accidental option.
+  ///
+  /// In en, this message translates to:
+  /// **'Flat'**
+  String get accidentalFlatLabel;
+
+  /// No-accidental option.
+  ///
+  /// In en, this message translates to:
+  /// **'Natural'**
+  String get accidentalNaturalLabel;
+
+  /// Sharp accidental option.
+  ///
+  /// In en, this message translates to:
+  /// **'Sharp'**
+  String get accidentalSharpLabel;
+
+  /// Label for the octave stepper in the note-editing dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'Octave'**
+  String get octaveLabel;
+
+  /// Whole-note duration option.
+  ///
+  /// In en, this message translates to:
+  /// **'Whole'**
+  String get durationWholeLabel;
+
+  /// Half-note duration option.
+  ///
+  /// In en, this message translates to:
+  /// **'Half'**
+  String get durationHalfLabel;
+
+  /// Quarter-note duration option.
+  ///
+  /// In en, this message translates to:
+  /// **'Quarter'**
+  String get durationQuarterLabel;
+
+  /// Eighth-note duration option.
+  ///
+  /// In en, this message translates to:
+  /// **'Eighth'**
+  String get durationEighthLabel;
+
+  /// Toggle for a dotted (1.5x length) note/rest in the note-editing dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'Dotted'**
+  String get dottedLabel;
+
+  /// Title for the dialog that edits one note/rest on a notation sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get noteEventDialogTitle;
 }
 
 class _AppLocalizationsDelegate

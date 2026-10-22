@@ -85,11 +85,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notationButtonLabel => 'Notation';
 
   @override
-  String comingSoonMessage(String feature) {
-    return 'The $feature editor isn\'t built yet — this button is a placeholder.';
-  }
-
-  @override
   String get cloudStorageNoticeTitle => 'Audio files may sync to the cloud';
 
   @override
@@ -228,4 +223,68 @@ class AppLocalizationsEn extends AppLocalizations {
   String baseFretButtonLabel(int fret) {
     return '${fret}fr';
   }
+
+  @override
+  String get notationSheetsTabLabel => 'Notation';
+
+  @override
+  String get notationSheetsListEmpty =>
+      'No notation sheets yet. Tap Notation in the toolbar to add one.';
+
+  @override
+  String get untitledNotationSheetTitle => 'Untitled sheet';
+
+  @override
+  String get renameNotationSheet => 'Rename sheet';
+
+  @override
+  String get deleteNotationSheet => 'Delete sheet';
+
+  @override
+  String get addNoteEventLabel => 'Add note';
+
+  @override
+  String get removeNoteEventLabel => 'Remove note';
+
+  @override
+  String get timeSignatureLabel => 'Time signature';
+
+  @override
+  String get restToggleLabel => 'Rest';
+
+  @override
+  String get pitchLetterLabel => 'Letter';
+
+  @override
+  String get accidentalLabel => 'Accidental';
+
+  @override
+  String get accidentalFlatLabel => 'Flat';
+
+  @override
+  String get accidentalNaturalLabel => 'Natural';
+
+  @override
+  String get accidentalSharpLabel => 'Sharp';
+
+  @override
+  String get octaveLabel => 'Octave';
+
+  @override
+  String get durationWholeLabel => 'Whole';
+
+  @override
+  String get durationHalfLabel => 'Half';
+
+  @override
+  String get durationQuarterLabel => 'Quarter';
+
+  @override
+  String get durationEighthLabel => 'Eighth';
+
+  @override
+  String get dottedLabel => 'Dotted';
+
+  @override
+  String get noteEventDialogTitle => 'Note';
 }

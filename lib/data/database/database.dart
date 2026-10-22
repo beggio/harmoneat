@@ -10,6 +10,7 @@ import 'tables/attachments_table.dart';
 import 'tables/chord_charts_table.dart';
 import 'tables/guitar_tabs_table.dart';
 import 'tables/instruments_table.dart';
+import 'tables/notation_sheets_table.dart';
 import 'tables/notes_table.dart';
 import 'tables/parts_table.dart';
 
@@ -17,6 +18,7 @@ export 'tables/attachments_table.dart';
 export 'tables/chord_charts_table.dart';
 export 'tables/guitar_tabs_table.dart';
 export 'tables/instruments_table.dart';
+export 'tables/notation_sheets_table.dart';
 export 'tables/notes_table.dart';
 export 'tables/parts_table.dart';
 
@@ -25,13 +27,21 @@ part 'database.g.dart';
 const guitarInstrumentId = 'instrument-guitar';
 
 @DriftDatabase(
-  tables: [Notes, Attachments, Instruments, Parts, GuitarTabs, ChordCharts],
+  tables: [
+    Notes,
+    Attachments,
+    Instruments,
+    Parts,
+    GuitarTabs,
+    ChordCharts,
+    NotationSheets,
+  ],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -45,6 +55,9 @@ class AppDatabase extends _$AppDatabase {
       }
       if (from < 3) {
         await m.createTable(chordCharts);
+      }
+      if (from < 4) {
+        await m.createTable(notationSheets);
       }
     },
   );

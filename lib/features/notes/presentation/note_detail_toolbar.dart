@@ -10,13 +10,12 @@ import '../../../data/providers.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../audio/application/audio_recorder_controller.dart';
 import '../../chord/presentation/chord_editor_screen.dart';
+import '../../notation/presentation/notation_editor_screen.dart';
 import '../../tab/presentation/tab_editor_screen.dart';
-import 'coming_soon_screen.dart';
 
 /// Persistent action bar for a note's detail screen — sits below the
-/// TabBar so Record/Import (and later chord-chart/tab/notation actions)
-/// stay reachable no matter which tab is active, instead of living inside
-/// one tab's content.
+/// TabBar so Record/Import/Tab/Chord/Notation actions stay reachable no
+/// matter which tab is active, instead of living inside one tab's content.
 class NoteDetailToolbar extends ConsumerWidget {
   const NoteDetailToolbar({super.key, required this.noteId});
 
@@ -77,8 +76,7 @@ class NoteDetailToolbar extends ConsumerWidget {
                 ),
                 const SizedBox(width: 12),
                 OutlinedButton.icon(
-                  onPressed: () =>
-                      _openComingSoon(context, l10n.notationButtonLabel),
+                  onPressed: () => _createAndOpenNotation(context, ref),
                   icon: const Icon(Icons.music_note_outlined),
                   label: Text(l10n.notationButtonLabel),
                 ),
@@ -86,14 +84,6 @@ class NoteDetailToolbar extends ConsumerWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  void _openComingSoon(BuildContext context, String featureName) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => ComingSoonScreen(featureName: featureName),
       ),
     );
   }
@@ -116,6 +106,21 @@ class NoteDetailToolbar extends ConsumerWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => ChordEditorScreen(chartId: chart.id),
+      ),
+    );
+  }
+
+  Future<void> _createAndOpenNotation(
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
+    final sheet = await ref
+        .read(notationSheetsRepositoryProvider)
+        .createBlank(noteId);
+    if (!context.mounted) return;
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => NotationEditorScreen(sheetId: sheet.id),
       ),
     );
   }

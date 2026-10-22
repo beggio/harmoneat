@@ -72,16 +72,25 @@
   `edgePadding` margin around the grid); and the O/X mute marker is now a visibly
   bordered, always-tappable box above each string.
 
-- **"Notation" button in the note-detail toolbar — standard notation editor.** Tapping it
-  creates a new blank standard notation sheet. Users need to add individual notes and
-  chords to it, and change, edit, delete, and add further sheets for the same note. This
-  is Phase 5 of the original roadmap, the hardest of the three content-block phases — the
-  plan called for spiking `crisp_notation` first (checking whether its model supports
-  authoring, not just display, and confirming its bundled Bravura SMuFL font's OFL license
-  is acceptable) before committing, with a constrained hand-rolled `CustomPainter` renderer
-  (single clef, simple rhythms) as the fallback if that spike fails. The `notations` table
-  is already FK'd to `parts` in the schema — this entry is the concrete trigger to build
-  it, alongside the "Tab" and "Chord" entries above for Phases 3-4.
+- **~~"Notation" button in the note-detail toolbar — standard notation editor~~ (shipped
+  2026-10-22).** Researched `crisp_notation` (pub.dev) before committing, per the
+  original plan: MIT/OFL, hit-testing/selection/drag support, but no documented
+  authoring API and still an immature, low-adoption dependency — went straight to the
+  plan's own fallback instead of spiking it live. Tapping Notation creates a blank sheet
+  and opens `lib/features/notation/presentation/notation_editor_screen.dart`: a
+  continuous treble-clef staff (`NotationStaffPainter`, hand-rolled `CustomPainter`, no
+  SMuFL font) rendering a flat, ordered sequence of notes/rests
+  (`NotationSheetData`/`NotationEvent`/`Pitch` in `notation_sheet_data.dart`) with
+  correct note-head shapes (open for whole/half, filled for quarter/eighth + flag),
+  duration-proportional spacing, ledger lines, engraving-correct stem direction (above
+  the middle line down, at/below it up — verified against real engraving references,
+  see `staff_geometry.dart`), and a time-signature selector that places barlines by
+  cumulative beats (no key signatures or chords — scoped to single clef, single-note
+  melodic line, simple rhythms, consistent with the plan's stated fallback). New
+  `notation_sheets` table (schema v4), mirroring `guitar_tabs`/`chord_charts`; a
+  "Notation" list tab was added to the note detail screen, and note deletion cascades
+  to notation sheets too. The now-redundant `ComingSoonScreen` placeholder (no toolbar
+  button pointed at it anymore) was deleted.
 
 - **~~Accessibility/appearance settings: large-print toggle, substitute monospace
   default font, and four selectable color schemes~~ (shipped 2026-10-22).** Added a
