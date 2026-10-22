@@ -269,5 +269,35 @@
   "chordNameDialogTitle": "Chord name",
   "@chordNameDialogTitle": {
     "description": "Title and field label for the dialog that names a chord diagram (e.g. \"C\", \"G7\")."
+  },
+  "capoSelectorLabel": "Capo",
+  "@capoSelectorLabel": {
+    "description": "Label for the capo dropdown on a chord chart."
+  },
+  "capoNoneLabel": "No capo",
+  "@capoNoneLabel": {
+    "description": "Capo dropdown option meaning no capo is used."
+  },
+  "capoFretOptionLabel": "Fret {fret}",
+  "@capoFretOptionLabel": {
+    "description": "Capo dropdown option naming the fret the capo is placed on.",
+    "placeholders": {
+      "fret": {
+        "type": "int"
+      }
+    }
+  },
+  "baseFretDialogTitle": "Base fret",
+  "@baseFretDialogTitle": {
+    "description": "Title and field label for the dialog that sets which fret a chord diagram's first row represents."
+  },
+  "baseFretButtonLabel": "{fret}fr",
+  "@baseFretButtonLabel": {
+    "description": "Button label showing a chord diagram's base fret (e.g. \"5fr\"), shown when it's higher than the nut.",
+    "placeholders": {
+      "fret": {
+        "type": "int"
+      }
+    }
   }
 }

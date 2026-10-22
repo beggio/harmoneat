@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,6 +10,7 @@ import '../../../shared/music/tuning_selector.dart';
 import '../../tab/application/finger_colors.dart';
 import '../application/chord_chart_data.dart';
 import '../application/chord_chart_provider.dart';
+import 'capo_selector.dart';
 import 'chord_diagram_painter.dart';
 
 enum _StringDialogResult { save, clear }
@@ -65,11 +68,26 @@ class ChordEditorScreen extends ConsumerWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                child: TuningSelector(
-                  tuning: data.tuning,
-                  onChanged: (preset) => ref
-                      .read(chordChartsRepositoryProvider)
-                      .updateData(chartId, data.withTuning(preset.stringNames)),
+                child: Wrap(
+                  spacing: 24,
+                  runSpacing: 8,
+                  children: [
+                    TuningSelector(
+                      tuning: data.tuning,
+                      onChanged: (preset) => ref
+                          .read(chordChartsRepositoryProvider)
+                          .updateData(
+                            chartId,
+                            data.withTuning(preset.stringNames),
+                          ),
+                    ),
+                    CapoSelector(
+                      capoFret: data.capoFret,
+                      onChanged: (fret) => ref
+                          .read(chordChartsRepositoryProvider)
+                          .updateData(chartId, data.withCapoFret(fret)),
+                    ),
+                  ],
                 ),
               ),
               const _FingerLegend(),
@@ -225,6 +243,12 @@ class _ChordDiagramCard extends ConsumerWidget {
   static const fretRows = 5;
   static const markerSize = 24.0;
 
+  /// Extra margin on each side of the grid so the open/muted markers and
+  /// the finger dots on the low/high (edge) strings aren't cut off —
+  /// they're centered *on* the edge string lines, so without this margin
+  /// half of each would fall outside the grid's own width.
+  static const edgePadding = 14.0;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
@@ -233,6 +257,7 @@ class _ChordDiagramCard extends ConsumerWidget {
     final stringCount = diagram.strings.length;
     final gridWidth = (stringCount - 1) * stringSpacing;
     final gridHeight = fretRows * fretRowHeight;
+    final cardWidth = gridWidth + 2 * edgePadding;
 
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -247,6 +272,10 @@ class _ChordDiagramCard extends ConsumerWidget {
                 child: Text(
                   diagram.name.isEmpty ? l10n.untitledChordLabel : diagram.name,
                 ),
+              ),
+              TextButton(
+                onPressed: () => _editBaseFret(context, ref, diagram.baseFret),
+                child: Text(l10n.baseFretButtonLabel(diagram.baseFret)),
               ),
               IconButton(
                 icon: const Icon(Icons.close, size: 14),
@@ -263,13 +292,13 @@ class _ChordDiagramCard extends ConsumerWidget {
             ],
           ),
           SizedBox(
-            width: gridWidth,
+            width: cardWidth,
             height: markerSize,
             child: Stack(
               children: [
                 for (var s = 0; s < stringCount; s++)
                   Positioned(
-                    left: s * stringSpacing - markerSize / 2,
+                    left: edgePadding + s * stringSpacing - markerSize / 2,
                     width: markerSize,
                     height: markerSize,
                     child: _OpenMuteMarker(
@@ -281,24 +310,29 @@ class _ChordDiagramCard extends ConsumerWidget {
             ),
           ),
           SizedBox(
-            width: gridWidth,
+            width: cardWidth,
             height: gridHeight,
             child: Stack(
               children: [
-                CustomPaint(
-                  size: Size(gridWidth, gridHeight),
-                  painter: ChordDiagramPainter(
-                    strings: diagram.strings,
-                    fretRows: fretRows,
-                    stringSpacing: stringSpacing,
-                    fretRowHeight: fretRowHeight,
-                    lineColor: colorScheme.outlineVariant,
+                Positioned(
+                  left: edgePadding,
+                  top: 0,
+                  child: CustomPaint(
+                    size: Size(gridWidth, gridHeight),
+                    painter: ChordDiagramPainter(
+                      strings: diagram.strings,
+                      fretRows: fretRows,
+                      stringSpacing: stringSpacing,
+                      fretRowHeight: fretRowHeight,
+                      lineColor: colorScheme.outlineVariant,
+                      showNut: diagram.baseFret == 0,
+                    ),
                   ),
                 ),
                 for (var s = 0; s < stringCount; s++)
                   for (var f = 1; f <= fretRows; f++)
                     Positioned(
-                      left: s * stringSpacing - stringSpacing / 2,
+                      left: edgePadding + s * stringSpacing - stringSpacing / 2,
                       top: (f - 1) * fretRowHeight,
                       width: stringSpacing,
                       height: fretRowHeight,
@@ -365,6 +399,48 @@ class _ChordDiagramCard extends ConsumerWidget {
       await ref
           .read(chordChartsRepositoryProvider)
           .updateData(chartId, data.withDiagramNameSet(diagramIndex, newName));
+    }
+  }
+
+  Future<void> _editBaseFret(
+    BuildContext context,
+    WidgetRef ref,
+    int currentBaseFret,
+  ) async {
+    final l10n = AppLocalizations.of(context)!;
+    final controller = TextEditingController(text: '$currentBaseFret');
+    final newBaseFret = await showDialog<int>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.baseFretDialogTitle),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(labelText: l10n.baseFretDialogTitle),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(l10n.cancel),
+          ),
+          TextButton(
+            onPressed: () {
+              final parsed = int.tryParse(controller.text);
+              Navigator.pop(context, parsed == null ? null : max(0, parsed));
+            },
+            child: Text(l10n.save),
+          ),
+        ],
+      ),
+    );
+    if (newBaseFret != null) {
+      await ref
+          .read(chordChartsRepositoryProvider)
+          .updateData(
+            chartId,
+            data.withDiagramBaseFretSet(diagramIndex, newBaseFret),
+          );
     }
   }
 
@@ -469,6 +545,9 @@ class _ChordDiagramCard extends ConsumerWidget {
   }
 }
 
+/// Always shows a bordered box above the string, even when fretted (blank
+/// inside), so there's a visibly tappable control for muting/opening a
+/// string rather than invisible empty space.
 class _OpenMuteMarker extends StatelessWidget {
   const _OpenMuteMarker({required this.string, required this.onTap});
 
@@ -480,8 +559,16 @@ class _OpenMuteMarker extends StatelessWidget {
     final label = string.isOpen ? 'O' : (string.isMuted ? 'X' : '');
     return InkWell(
       onTap: onTap,
-      child: Center(
-        child: Text(label, style: Theme.of(context).textTheme.labelMedium),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Theme.of(context).colorScheme.outlineVariant,
+          ),
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Center(
+          child: Text(label, style: Theme.of(context).textTheme.labelMedium),
+        ),
       ),
     );
   }

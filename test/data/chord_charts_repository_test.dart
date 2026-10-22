@@ -29,6 +29,7 @@ void main() {
         data.diagrams.first.strings,
         everyElement(predicate((ChordString s) => s.isOpen)),
       );
+      expect(data.diagrams.first.baseFret, 0);
 
       await db.close();
     },
@@ -53,6 +54,8 @@ void main() {
           value: const ChordString(fret: 3, finger: 1),
         )
         .withDiagramNameSet(0, 'C')
+        .withDiagramBaseFretSet(0, 5)
+        .withCapoFret(2)
         .withDiagramAdded();
     await charts.updateData(chart.id, data);
 
@@ -62,6 +65,8 @@ void main() {
     expect(updatedData.diagrams.first.name, 'C');
     expect(updatedData.diagrams.first.strings.first.fret, 3);
     expect(updatedData.diagrams.first.strings.first.finger, 1);
+    expect(updatedData.diagrams.first.baseFret, 5);
+    expect(updatedData.capoFret, 2);
 
     await charts.delete(chart.id);
     final afterDelete = await charts.watchById(chart.id).first;

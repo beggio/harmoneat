@@ -64,7 +64,13 @@
   the same optional 1-5 finger assignment and tuning dropdown (E / E♭ / Drop D) as the
   Tab editor. New `chord_charts` Drift table (schema v3) FK'd to `parts`, mirroring
   `guitar_tabs`; a "Chords" list tab was added to the note detail screen alongside
-  Tabs, and note deletion now cascades to chord charts too.
+  Tabs, and note deletion now cascades to chord charts too. Follow-up mods
+  (2026-10-22): each diagram has a `baseFret` (default 0 = the nut; shown as "0fr",
+  editable via a button next to the chord name) so barre shapes can be drawn higher up
+  the neck without the nut emphasis; a `capoFret` dropdown per chart (next to Tuning);
+  open/fretted markers on the low/high edge strings no longer get clipped (added
+  `edgePadding` margin around the grid); and the O/X mute marker is now a visibly
+  bordered, always-tappable box above each string.
 
 - **"Notation" button in the note-detail toolbar — standard notation editor.** Tapping it
   creates a new blank standard notation sheet. Users need to add individual notes and

@@ -483,6 +483,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Chord name'**
   String get chordNameDialogTitle;
+
+  /// Label for the capo dropdown on a chord chart.
+  ///
+  /// In en, this message translates to:
+  /// **'Capo'**
+  String get capoSelectorLabel;
+
+  /// Capo dropdown option meaning no capo is used.
+  ///
+  /// In en, this message translates to:
+  /// **'No capo'**
+  String get capoNoneLabel;
+
+  /// Capo dropdown option naming the fret the capo is placed on.
+  ///
+  /// In en, this message translates to:
+  /// **'Fret {fret}'**
+  String capoFretOptionLabel(int fret);
+
+  /// Title and field label for the dialog that sets which fret a chord diagram's first row represents.
+  ///
+  /// In en, this message translates to:
+  /// **'Base fret'**
+  String get baseFretDialogTitle;
+
+  /// Button label showing a chord diagram's base fret (e.g. "5fr"), shown when it's higher than the nut.
+  ///
+  /// In en, this message translates to:
+  /// **'{fret}fr'**
+  String baseFretButtonLabel(int fret);
 }
 
 class _AppLocalizationsDelegate

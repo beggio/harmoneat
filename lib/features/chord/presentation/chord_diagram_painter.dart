@@ -16,6 +16,7 @@ class ChordDiagramPainter extends CustomPainter {
     required this.stringSpacing,
     required this.fretRowHeight,
     required this.lineColor,
+    this.showNut = true,
   });
 
   final List<ChordString> strings;
@@ -23,6 +24,12 @@ class ChordDiagramPainter extends CustomPainter {
   final double stringSpacing;
   final double fretRowHeight;
   final Color lineColor;
+
+  /// Whether row 0 is the real nut (drawn thick). `false` for a diagram
+  /// whose `baseFret` is above 0 — there's no nut in view, so the top line
+  /// is drawn the same weight as every other fret line, and the
+  /// surrounding widget shows a "Nfr" label instead.
+  final bool showNut;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -49,7 +56,7 @@ class ChordDiagramPainter extends CustomPainter {
       canvas.drawLine(
         Offset(0, y),
         Offset(gridWidth, y),
-        f == 0 ? nutPaint : fretPaint,
+        f == 0 && showNut ? nutPaint : fretPaint,
       );
     }
 
@@ -69,6 +76,8 @@ class ChordDiagramPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant ChordDiagramPainter oldDelegate) {
-    return oldDelegate.strings != strings || oldDelegate.lineColor != lineColor;
+    return oldDelegate.strings != strings ||
+        oldDelegate.lineColor != lineColor ||
+        oldDelegate.showNut != showNut;
   }
 }

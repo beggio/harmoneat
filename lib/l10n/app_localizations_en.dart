@@ -209,4 +209,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chordNameDialogTitle => 'Chord name';
+
+  @override
+  String get capoSelectorLabel => 'Capo';
+
+  @override
+  String get capoNoneLabel => 'No capo';
+
+  @override
+  String capoFretOptionLabel(int fret) {
+    return 'Fret $fret';
+  }
+
+  @override
+  String get baseFretDialogTitle => 'Base fret';
+
+  @override
+  String baseFretButtonLabel(int fret) {
+    return '${fret}fr';
+  }
 }
