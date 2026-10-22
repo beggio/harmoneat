@@ -351,5 +351,5 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get allChordsSubtitle =>
-      'Every major and minor chord in standard tuning, shown the same way as the chord chart editor';
+      'Every major and minor chord in standard tuning';
 }

@@ -468,7 +468,7 @@
   "@allChordsTitle": {
     "description": "Title for the reference chart of every major and minor chord."
   },
-  "allChordsSubtitle": "Every major and minor chord in standard tuning, shown the same way as the chord chart editor",
+  "allChordsSubtitle": "Every major and minor chord in standard tuning",
   "@allChordsSubtitle": {
     "description": "One-line description shown under the All Chords entry on the resources list."
   }

@@ -745,7 +745,7 @@ abstract class AppLocalizations {
   /// One-line description shown under the All Chords entry on the resources list.
   ///
   /// In en, this message translates to:
-  /// **'Every major and minor chord in standard tuning, shown the same way as the chord chart editor'**
+  /// **'Every major and minor chord in standard tuning'**
   String get allChordsSubtitle;
 }
 
