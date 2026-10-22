@@ -1,77 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const _themeModeKey = 'themeMode';
-const _accentColorKey = 'accentColor';
+import 'color_schemes.dart';
+
+const _colorSchemeKey = 'appColorScheme';
 const _textScaleKey = 'textScale';
 const _localeKey = 'locale';
 const _cloudStorageAcknowledgedKey = 'cloudStorageAcknowledged';
 
-/// Simple user preferences (theme, accent, text scale, locale) belong here,
-/// not in Drift — they're prefs, not structured musical data. The Phase 2
-/// Settings screen will call the setters below; Phase 1 just wires the
-/// providers so every screen already respects them.
+/// Simple user preferences (appearance, text scale, locale) belong here,
+/// not in Drift — they're prefs, not structured musical data. The Settings
+/// screen calls the setters below; every other screen just watches the
+/// providers so it already respects whatever's chosen.
 final sharedPreferencesProvider = FutureProvider<SharedPreferences>((ref) {
   return SharedPreferences.getInstance();
 });
 
-class ThemeModeNotifier extends Notifier<ThemeMode> {
+class AppColorSchemeNotifier extends Notifier<AppColorScheme> {
   @override
-  ThemeMode build() {
+  AppColorScheme build() {
     _load();
-    return ThemeMode.system;
+    return AppColorScheme.light;
   }
 
   Future<void> _load() async {
     final prefs = await ref.read(sharedPreferencesProvider.future);
-    final stored = prefs.getString(_themeModeKey);
+    final stored = prefs.getString(_colorSchemeKey);
     if (stored != null) {
-      state = ThemeMode.values.firstWhere(
-        (m) => m.name == stored,
-        orElse: () => ThemeMode.system,
+      state = AppColorScheme.values.firstWhere(
+        (s) => s.name == stored,
+        orElse: () => AppColorScheme.light,
       );
     }
   }
 
-  Future<void> setThemeMode(ThemeMode mode) async {
-    state = mode;
+  Future<void> setScheme(AppColorScheme scheme) async {
+    state = scheme;
     final prefs = await ref.read(sharedPreferencesProvider.future);
-    await prefs.setString(_themeModeKey, mode.name);
+    await prefs.setString(_colorSchemeKey, scheme.name);
   }
 }
 
-final themeModeProvider = NotifierProvider<ThemeModeNotifier, ThemeMode>(
-  ThemeModeNotifier.new,
-);
-
-class AccentColorNotifier extends Notifier<Color> {
-  static const defaultColor = Colors.teal;
-
-  @override
-  Color build() {
-    _load();
-    return defaultColor;
-  }
-
-  Future<void> _load() async {
-    final prefs = await ref.read(sharedPreferencesProvider.future);
-    final stored = prefs.getInt(_accentColorKey);
-    if (stored != null) {
-      state = Color(stored);
-    }
-  }
-
-  Future<void> setColor(Color color) async {
-    state = color;
-    final prefs = await ref.read(sharedPreferencesProvider.future);
-    await prefs.setInt(_accentColorKey, color.toARGB32());
-  }
-}
-
-final accentColorProvider = NotifierProvider<AccentColorNotifier, Color>(
-  AccentColorNotifier.new,
-);
+final appColorSchemeProvider =
+    NotifierProvider<AppColorSchemeNotifier, AppColorScheme>(
+      AppColorSchemeNotifier.new,
+    );
 
 class TextScaleNotifier extends Notifier<double> {
   @override
@@ -157,17 +132,21 @@ final cloudStorageAcknowledgedProvider =
       CloudStorageAcknowledgedNotifier.new,
     );
 
-ThemeData buildTheme({
-  required Brightness brightness,
-  required Color seedColor,
-}) {
+/// Stand-in for Andale Mono, which is a licensed Monotype font Flutter
+/// can't pick up from the OS by name — it must ship as an embedded font
+/// file. JetBrains Mono is a free, visually similar monospace used here
+/// until a licensed Andale Mono file is added to `assets/fonts` and swapped
+/// in below.
+ThemeData buildTheme(AppColorScheme scheme) {
+  final colorScheme = colorSchemeFor(scheme);
+  final textTheme = GoogleFonts.jetBrainsMonoTextTheme(
+    ThemeData(brightness: colorScheme.brightness).textTheme,
+  );
   return ThemeData(
     useMaterial3: true,
-    brightness: brightness,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: seedColor,
-      brightness: brightness,
-    ),
+    brightness: colorScheme.brightness,
+    colorScheme: colorScheme,
+    textTheme: textTheme,
     visualDensity: VisualDensity.adaptivePlatformDensity,
   );
 }

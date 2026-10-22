@@ -205,5 +205,33 @@
   "tuningDropDLabel": "Drop D",
   "@tuningDropDLabel": {
     "description": "Drop D guitar tuning preset label."
+  },
+  "settingsScreenTitle": "Settings",
+  "@settingsScreenTitle": {
+    "description": "App bar title for the settings screen."
+  },
+  "largePrintLabel": "Large print",
+  "@largePrintLabel": {
+    "description": "Switch label that enables larger text throughout the app."
+  },
+  "colorSchemeSectionLabel": "Color scheme",
+  "@colorSchemeSectionLabel": {
+    "description": "Heading for the color scheme selector on the settings screen."
+  },
+  "colorSchemeLightLabel": "Light",
+  "@colorSchemeLightLabel": {
+    "description": "The default light color scheme option."
+  },
+  "colorSchemeDarkHighContrastLabel": "Dark High Contrast",
+  "@colorSchemeDarkHighContrastLabel": {
+    "description": "A high-contrast dark color scheme, modeled on Windows' built-in High Contrast Black theme."
+  },
+  "colorSchemeDarkModernLabel": "Dark Modern",
+  "@colorSchemeDarkModernLabel": {
+    "description": "A dark color scheme modeled on Windows 11's dark mode."
+  },
+  "colorSchemeUrbanCamoLabel": "Urban Camo",
+  "@colorSchemeUrbanCamoLabel": {
+    "description": "A camouflage-inspired olive/khaki/tan dark color scheme."
   }
 }

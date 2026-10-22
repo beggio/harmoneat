@@ -11,20 +11,14 @@ class HarmoNeatApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(themeModeProvider);
-    final accentColor = ref.watch(accentColorProvider);
+    final colorScheme = ref.watch(appColorSchemeProvider);
     final textScale = ref.watch(textScaleProvider);
     final localeOverride = ref.watch(localeOverrideProvider);
 
     return MaterialApp(
       title: 'HarmoNeat',
       debugShowCheckedModeBanner: false,
-      themeMode: themeMode,
-      theme: buildTheme(brightness: Brightness.light, seedColor: accentColor),
-      darkTheme: buildTheme(
-        brightness: Brightness.dark,
-        seedColor: accentColor,
-      ),
+      theme: buildTheme(colorScheme),
       locale: localeOverride,
       localizationsDelegates: const [
         AppLocalizations.delegate,

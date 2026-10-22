@@ -387,6 +387,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Drop D'**
   String get tuningDropDLabel;
+
+  /// App bar title for the settings screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsScreenTitle;
+
+  /// Switch label that enables larger text throughout the app.
+  ///
+  /// In en, this message translates to:
+  /// **'Large print'**
+  String get largePrintLabel;
+
+  /// Heading for the color scheme selector on the settings screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Color scheme'**
+  String get colorSchemeSectionLabel;
+
+  /// The default light color scheme option.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get colorSchemeLightLabel;
+
+  /// A high-contrast dark color scheme, modeled on Windows' built-in High Contrast Black theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark High Contrast'**
+  String get colorSchemeDarkHighContrastLabel;
+
+  /// A dark color scheme modeled on Windows 11's dark mode.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Modern'**
+  String get colorSchemeDarkModernLabel;
+
+  /// A camouflage-inspired olive/khaki/tan dark color scheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Urban Camo'**
+  String get colorSchemeUrbanCamoLabel;
 }
 
 class _AppLocalizationsDelegate

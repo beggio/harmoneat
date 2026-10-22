@@ -75,3 +75,16 @@
   (single clef, simple rhythms) as the fallback if that spike fails. The `notations` table
   is already FK'd to `parts` in the schema — this entry is the concrete trigger to build
   it, alongside the "Tab" and "Chord" entries above for Phases 3-4.
+
+- **~~Accessibility/appearance settings: large-print toggle, substitute monospace
+  default font, and four selectable color schemes~~ (shipped 2026-10-22).** Added a
+  Settings destination to the nav shell (`lib/features/settings/presentation/
+  settings_screen.dart`) with a large-print switch (drives the existing
+  `textScaleProvider` to 1.3x) and a radio list for `AppColorScheme`
+  (`lib/app/color_schemes.dart`): Light, Dark High Contrast (Windows' High Contrast
+  Black palette), Dark Modern (Windows 11 dark mode), and Urban Camo (olive/khaki/tan).
+  Replaced the old unused `ThemeModeNotifier`/`AccentColorNotifier` scaffolding in
+  `lib/app/theme.dart` with a single persisted `appColorSchemeProvider`. Andale Mono
+  itself is a licensed Monotype font Flutter can't reference by OS name — substituted
+  JetBrains Mono (via the `google_fonts` package) as the default UI font everywhere
+  until a licensed Andale Mono file is supplied to swap in.

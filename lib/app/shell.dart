@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../features/notes/presentation/notes_list_screen.dart';
+import '../features/settings/presentation/settings_screen.dart';
 import '../l10n/app_localizations.dart';
 
 /// Adaptive navigation shell: a `NavigationRail` down the side on
 /// desktop/tablet-landscape widths, a bottom `NavigationBar` on narrow
-/// widths, switched at Material's ~600dp breakpoint. Phase 1 has a single
-/// destination (Notes); Phase 2's Settings screen is a second entry here,
-/// not a shell rewrite.
+/// widths, switched at Material's ~600dp breakpoint.
 class AppShell extends StatefulWidget {
   const AppShell({super.key});
 
@@ -24,12 +23,17 @@ class _AppShellState extends State<AppShell> {
       icon: Icons.note_alt_outlined,
       selectedIcon: Icons.note_alt,
     ),
+    _Destination(
+      screen: SettingsScreen(),
+      icon: Icons.settings_outlined,
+      selectedIcon: Icons.settings,
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final labels = [l10n.navNotes];
+    final labels = [l10n.navNotes, l10n.navSettings];
     final body = IndexedStack(
       index: _selectedIndex,
       children: [for (final d in _destinations) d.screen],

@@ -160,4 +160,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tuningDropDLabel => 'Drop D';
+
+  @override
+  String get settingsScreenTitle => 'Settings';
+
+  @override
+  String get largePrintLabel => 'Large print';
+
+  @override
+  String get colorSchemeSectionLabel => 'Color scheme';
+
+  @override
+  String get colorSchemeLightLabel => 'Light';
+
+  @override
+  String get colorSchemeDarkHighContrastLabel => 'Dark High Contrast';
+
+  @override
+  String get colorSchemeDarkModernLabel => 'Dark Modern';
+
+  @override
+  String get colorSchemeUrbanCamoLabel => 'Urban Camo';
 }
