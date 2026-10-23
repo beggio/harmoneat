@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "assets/audio/MuseScore_General.sf2",
+      "url": "https://github.com/beggio/harmoneat/releases/download/assets-v1/MuseScore_General.sf2",
+      "sha256": "ee51d2c4b1525e70f19a45909c4fd7a2e26d91d115fa89dbf5a6bc413d8b9bf3",
+      "sizeBytes": 215614036,
+      "notes": "MIT license — see assets/audio/LICENSE.txt. Uncompressed SF2 required: soundfont_kit 1.1.1 mis-parses the compressed .sf3's loop points (see BACKLOG.md)."
+    }
+  ]
+}

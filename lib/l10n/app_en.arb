@@ -532,5 +532,29 @@
   "splashContinueLabel": "Continue",
   "@splashContinueLabel": {
     "description": "Button label that dismisses the splash screen."
+  },
+  "chordInstrumentSectionLabel": "Chord Playback Sound",
+  "@chordInstrumentSectionLabel": {
+    "description": "Heading for the chord-instrument-sound selector on the settings screen."
+  },
+  "chordInstrumentGuitarLabel": "Guitar",
+  "@chordInstrumentGuitarLabel": {
+    "description": "Guitar chord-playback instrument option."
+  },
+  "chordInstrumentPianoLabel": "Piano",
+  "@chordInstrumentPianoLabel": {
+    "description": "Piano chord-playback instrument option."
+  },
+  "chordInstrumentFemaleVoiceLabel": "Female Voice",
+  "@chordInstrumentFemaleVoiceLabel": {
+    "description": "Choir/voice chord-playback instrument option."
+  },
+  "playChordLabel": "Play chord",
+  "@playChordLabel": {
+    "description": "Tooltip for the button that plays a chord diagram's voicing."
+  },
+  "stopChordLabel": "Stop",
+  "@stopChordLabel": {
+    "description": "Tooltip for the button that stops a currently-sounding chord."
   }
 }

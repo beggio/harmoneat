@@ -26,7 +26,83 @@
 
 ## Bugs
 
+- **Guitar chord playback rings at the end of the note instead of cutting off
+  cleanly.** Reported by the user after confirming the piano/guitar/voice silence
+  fix (2026-10-23). Only affects the guitar instrument choice. Likely the Nylon
+  String Guitar (GM program 24) sample/zone itself has a long natural release or a
+  loop tail that doesn't suit a short strummed chord; one possible fix is trying a
+  different GM guitar program (e.g. Acoustic Guitar (steel), program 25) from the
+  same bundled soundfont instead of Nylon String Guitar — see
+  `lib/features/chord/application/soundfont_chord_sound_engine.dart`'s
+  `_gmProgramFor` map. Not yet investigated.
+
+- **~~Chord playback sounds wrong on piano/guitar, and (separately) all three
+  instruments went silent~~ (fixed 2026-10-23, confirmed by user re-test — all three
+  instruments now play correctly).** Two distinct, now-fixed bugs stacked on top of
+  each other:
+  1. **Bank-vs-program mismatch.** Guitar was silent; piano played a fixed
+     drum-like sound regardless of pitch. Confirmed with real data — a throwaway
+     `flutter test` loaded the bundled soundfont and printed its preset table
+     (plain `dart run` can't do this: `soundfont_kit` transitively needs `dart:ui`,
+     Flutter-only). Found `bank=128 program=0 "Standard"` (a drum kit) sorting
+     *before* `bank=0 program=0 "Grand Piano"`, and `bank=8 program=24 "Ukulele"`
+     sorting before `bank=0 program=24 "Nylon String Guitar"`. The GM program
+     lookup matched by `program` number only, not `bank`. Fixed by requiring
+     `bank == 0` in `selectPreset` (`soundfont_chord_sound_engine.dart`), covered by
+     `test/features/chord/soundfont_chord_sound_engine_test.dart` (fake presets, no
+     real soundfont needed).
+  2. **All three instruments then went totally silent after fix #1** — including
+     female voice, which explains why it had been silent from the start; it was
+     never a separate bug. Root cause confirmed via a side-by-side diagnostic
+     (`flutter test` loading both the bundled `.sf3` and the raw `.sf2` and
+     printing each sample's parsed loop points): `soundfont_kit` 1.1.1 mis-parses
+     loop points for Ogg Vorbis-compressed (`.sf3`) samples — e.g. the guitar
+     sample's `loopStart` came out as `-20043507` (should be `62185`, confirmed
+     against the same sample in the uncompressed `.sf2`). It reuses the SF2
+     header's raw `start`/`startloop` sample-point fields for ogg samples without
+     converting compressed-byte offsets to decoded-PCM-frame offsets, so
+     `SoLoud.playScheduled`'s loop-region validation threw
+     `Invalid argument (loopingStartOffsetAt): Must not be negative` on every
+     single note, for every instrument, every time. Fixed by switching the bundled
+     soundfont from `assets/audio/MuseScore_General.sf3` (39.9MB, broken) to
+     `assets/audio/MuseScore_General.sf2` (215MB, uncompressed, confirmed correct
+     loop points) — `pubspec.yaml` and `soundfont_chord_sound_engine.dart` updated
+     accordingly.
+
+  **Consequence needing a decision**: the working `.sf2` is 215MB, over GitHub's
+  100MB-per-file limit — committing it as a normal tracked file will be rejected.
+  It needs Git LFS (already installed locally: `git-lfs/3.7.1`) tracking it before
+  it can be committed/pushed. Not yet set up or committed — flagged here rather
+  than done silently, since it's a standing repo-infrastructure change.
+  Alternative, not yet attempted: trim the `.sf2` down to just the 3 GM programs
+  actually used (guitar/piano/choir) with a soundfont editor (e.g. Polyphone) to
+  get back under 100MB without needing LFS at all — deferred since no such tool is
+  set up in this environment yet.
+
 ## Features
+
+- **Add a Caporio Software copyright disclaimer to the splash screen and Settings
+  page.** Likely a small static text addition near the existing splash branding
+  (`lib/` splash screen widget) and somewhere on `settings_screen.dart` (e.g. near
+  the bottom, similar to an "About" footer) — exact wording/placement not yet
+  decided.
+
+- **Import tablature from a standard file format.** Investigate whether there's a
+  widely-used tab file format worth supporting (e.g. Guitar Pro's `.gp*`/`.gpx`,
+  the plain-text ASCII-tab convention, or MusicXML's tablature support) and, if
+  one exists with a tractable parser, add an import path into a note's Tab
+  editor (`lib/features/tab/`) alongside the existing manual tab-entry flow —
+  so a tab doesn't have to be hand-typed if the user already has a file for it.
+
+- **Security test framework to catch committed credentials, PII, or webhook URLs.**
+  The beta-testing webhook URL is already handled by convention
+  (`beta.local.json`, gitignored, with a `.example` template — see
+  `scripts/build_beta.ps1`), but that relies on every contributor following the
+  convention by hand. Add an automated check (e.g. a pre-commit hook and/or a
+  CI/test-suite step using a secret-scanning tool or a small custom regex scan)
+  that fails if a commit/PR introduces anything that looks like an API key,
+  webhook URL, access token, or personally identifiable information, so a
+  mistake doesn't depend on someone remembering to check `git status` by hand.
 
 - **~~UI toolbar for note-detail actions~~ (shipped 2026-10-21).** Added
   `lib/features/notes/presentation/note_detail_toolbar.dart` — a persistent bar between
@@ -220,3 +296,38 @@
     stray file and confirmed a truly clean run shows no notes. Documented as a
     permanent caveat in `BETA_TESTING.md` (testing "does a new install start empty"
     needs either a different machine or deleting that file first).
+
+- **~~Chord playback — "full audio sampling integration"~~ (shipped 2026-10-22).**
+  Every chord diagram (both in the Chord editor and the read-only "All Chords"
+  reference) now has a play button that plays its *actual fingered voicing* — e.g.
+  open C major plays C, E, G, C, E (low to high), not an abstract "C major triad" —
+  via `lib/features/chord/application/chord_pitch.dart`, pure-Dart chromatic MIDI
+  math that also makes `capoFret` functional for the first time anywhere in the app
+  (every sounding note raised by the capo's fret count). Guitar/Piano/Female Voice
+  (GM Choir Aahs, the standard stand-in — no true "female voice" GM instrument
+  exists) are selectable in Settings, default Guitar, persisted the same way as
+  color scheme. **Spike outcome**: `soundfont_kit` (pure-Dart SF2/SF3 reader+player
+  on `flutter_soloud`) checked out — its own official example app demonstrates
+  exactly this polyphonic-chord use case (sequential `playPreset` calls that
+  overlap/sustain together), confirmed against the actual package source (not just
+  docs) for exact API names (`Preset`, not `SoundFontPreset`; `SoundFontFile.fromAsset`
+  simpler than manual `rootBundle` loading). No fallback needed. Bundled asset: the
+  user's own copy of MuseScore's MIT-licensed `MuseScore_General.sf3` (~40MB
+  compressed; the 215MB uncompressed `.sf2` wasn't bundled, kept local only) — I
+  can't autonomously download binary assets from unverified web sources, so asked
+  the user to source it rather than guessing a download link. A real design decision
+  (not previously documented anywhere): `baseFret`'s row-relative fret encoding
+  (`ChordString.fret`) does **not** apply to open strings (`fret == 0`) — those are
+  always absolute fret 0 regardless of `baseFret`, since they're drawn as "O" above
+  the nut, not as a grid row; caught this via a dedicated test case before it could
+  silently mis-price an edge-case voicing. Covered by
+  `test/features/chord/chord_pitch_test.dart` (9 cases, including the open-C
+  acceptance example, a capo case, Drop D, and the open-string-in-a-barre edge case).
+  Caught and fixed two real bugs during integration: a `ChordPlaybackController`
+  that called `ref.read` inside `onDispose` (Riverpod forbids this; only surfaced
+  once a test actually used a real `ProviderScope` and tore it down), and a
+  `RenderFlex` overflow from the new play button's default 48×48 tap target not
+  fitting narrow diagram cards. **Not yet confirmed**: actual audio output — I
+  cannot click buttons or hear sound myself; the app launches cleanly and all
+  static/unit verification passes, but the real play-and-listen check is the user's
+  to do.

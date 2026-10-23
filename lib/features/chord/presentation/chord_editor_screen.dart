@@ -10,8 +10,10 @@ import '../../../shared/music/tuning_selector.dart';
 import '../../tab/application/finger_colors.dart';
 import '../application/chord_chart_data.dart';
 import '../application/chord_chart_provider.dart';
+import '../application/chord_pitch.dart';
 import 'capo_selector.dart';
 import 'chord_diagram_painter.dart';
+import 'chord_play_button.dart';
 
 enum _StringDialogResult { save, clear }
 
@@ -276,6 +278,10 @@ class _ChordDiagramCard extends ConsumerWidget {
               TextButton(
                 onPressed: () => _editBaseFret(context, ref, diagram.baseFret),
                 child: Text(l10n.baseFretButtonLabel(diagram.baseFret)),
+              ),
+              ChordPlayButton(
+                playbackKey: '$chartId:$diagramIndex',
+                midiNotes: chordMidiNotes(data, diagram),
               ),
               IconButton(
                 icon: const Icon(Icons.close, size: 14),

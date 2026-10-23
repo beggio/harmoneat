@@ -1,0 +1,8 @@
+MuseScore_General.sf2
+
+A General MIDI SoundFont bundled with the MuseScore notation editor
+(https://musescore.org), used here for chord-playback sampling (guitar,
+piano, and choir/voice patches).
+
+License: MIT
+https://github.com/musescore/MuseScore/blob/master/share/sound/MuseScore_General_License.md

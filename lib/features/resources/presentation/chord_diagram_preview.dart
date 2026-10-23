@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../chord/application/chord_chart_data.dart';
+import '../../chord/application/chord_pitch.dart';
 import '../../chord/presentation/chord_diagram_painter.dart';
+import '../../chord/presentation/chord_play_button.dart';
 
 /// A read-only chord diagram, reusing the exact same `ChordDiagramPainter`
 /// (and matching geometry/markers) as the chord chart editor, so this
@@ -13,10 +15,14 @@ class ChordDiagramPreview extends StatelessWidget {
     super.key,
     required this.label,
     required this.diagram,
+    required this.tuning,
+    this.capoFret,
   });
 
   final String label;
   final ChordDiagram diagram;
+  final List<String> tuning;
+  final int? capoFret;
 
   static const stringSpacing = 24.0;
   static const fretRowHeight = 28.0;
@@ -36,7 +42,16 @@ class ChordDiagramPreview extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(label, style: Theme.of(context).textTheme.titleMedium),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(label, style: Theme.of(context).textTheme.titleMedium),
+            ChordPlayButton(
+              playbackKey: label,
+              midiNotes: chordMidiNotesFor(tuning, capoFret, diagram),
+            ),
+          ],
+        ),
         SizedBox(
           height: 16,
           child: diagram.baseFret > 0

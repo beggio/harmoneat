@@ -403,4 +403,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get splashContinueLabel => 'Continue';
+
+  @override
+  String get chordInstrumentSectionLabel => 'Chord Playback Sound';
+
+  @override
+  String get chordInstrumentGuitarLabel => 'Guitar';
+
+  @override
+  String get chordInstrumentPianoLabel => 'Piano';
+
+  @override
+  String get chordInstrumentFemaleVoiceLabel => 'Female Voice';
+
+  @override
+  String get playChordLabel => 'Play chord';
+
+  @override
+  String get stopChordLabel => 'Stop';
 }

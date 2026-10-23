@@ -831,6 +831,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Continue'**
   String get splashContinueLabel;
+
+  /// Heading for the chord-instrument-sound selector on the settings screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Chord Playback Sound'**
+  String get chordInstrumentSectionLabel;
+
+  /// Guitar chord-playback instrument option.
+  ///
+  /// In en, this message translates to:
+  /// **'Guitar'**
+  String get chordInstrumentGuitarLabel;
+
+  /// Piano chord-playback instrument option.
+  ///
+  /// In en, this message translates to:
+  /// **'Piano'**
+  String get chordInstrumentPianoLabel;
+
+  /// Choir/voice chord-playback instrument option.
+  ///
+  /// In en, this message translates to:
+  /// **'Female Voice'**
+  String get chordInstrumentFemaleVoiceLabel;
+
+  /// Tooltip for the button that plays a chord diagram's voicing.
+  ///
+  /// In en, this message translates to:
+  /// **'Play chord'**
+  String get playChordLabel;
+
+  /// Tooltip for the button that stops a currently-sounding chord.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get stopChordLabel;
 }
 
 class _AppLocalizationsDelegate

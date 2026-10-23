@@ -59,3 +59,16 @@ app.*.map.json
 /assets/IMG_*.png
 /assets/IMG_*.gif
 /assets/IMG_*.tiff
+
+# Large third-party soundfont: not git-tracked at all (215MB, too large
+# for a normal commit — Git LFS was considered and explicitly rejected).
+# tool/fetch_assets.dart downloads and sha256-verifies it from a GitHub
+# Release into assets/audio/ at build time instead; only the manifest
+# (tool/external_assets.json) is committed. The compressed .sf3 was
+# dropped entirely: soundfont_kit 1.1.1 mis-parses its Ogg-compressed
+# sample loop points (confirmed via a side-by-side diagnostic — see
+# BACKLOG.md), causing every chord to throw instead of playing.
+/assets/MuseScore_General.sf2
+/assets/MuseScore_General.sf3
+/assets/audio/MuseScore_General.sf2
+/assets/audio/MuseScore_General.sf2.download

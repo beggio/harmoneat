@@ -24,6 +24,13 @@ if ([string]::IsNullOrWhiteSpace($webhookUrl) -or $webhookUrl -like "*REPLACE_WI
 
 Push-Location $repoRoot
 try {
+    Write-Host "Fetching external build assets..."
+    & dart run tool/fetch_assets.dart
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "fetch_assets.dart failed."
+        exit $LASTEXITCODE
+    }
+
     Write-Host "Building beta Windows release..."
     & flutter build windows --release `
         --dart-define=BETA_BUILD=true `

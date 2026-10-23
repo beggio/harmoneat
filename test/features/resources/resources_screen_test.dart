@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:harmoneat/features/resources/presentation/all_chords_screen.dart';
 import 'package:harmoneat/features/resources/presentation/circle_of_fifths_screen.dart';
 import 'package:harmoneat/features/resources/presentation/resources_list_screen.dart';
 import 'package:harmoneat/l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-Widget _wrap(Widget child) => MaterialApp(
-  localizationsDelegates: AppLocalizations.localizationsDelegates,
-  supportedLocales: AppLocalizations.supportedLocales,
-  home: child,
+Widget _wrap(Widget child) => ProviderScope(
+  child: MaterialApp(
+    localizationsDelegates: AppLocalizations.localizationsDelegates,
+    supportedLocales: AppLocalizations.supportedLocales,
+    home: child,
+  ),
 );
 
 void main() {
+  setUp(() {
+    // chord_play_button.dart's providers read shared_preferences
+    // (via chordInstrumentProvider), which needs a mocked backing store
+    // in a widget test.
+    SharedPreferences.setMockInitialValues({});
+  });
+
   testWidgets('resources list shows both tools and navigates to each', (
     tester,
   ) async {

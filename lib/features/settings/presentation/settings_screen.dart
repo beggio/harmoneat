@@ -6,6 +6,7 @@ import '../../../app/color_schemes.dart';
 import '../../../app/theme.dart';
 import '../../../beta/beta_config.dart';
 import '../../../beta/beta_feedback_dialog.dart';
+import '../../chord/application/chord_instrument.dart';
 import '../../../l10n/app_localizations.dart';
 
 const _largePrintScale = 1.3;
@@ -18,6 +19,7 @@ class SettingsScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
     final textScale = ref.watch(textScaleProvider);
     final colorScheme = ref.watch(appColorSchemeProvider);
+    final chordInstrument = ref.watch(chordInstrumentProvider);
 
     final colorSchemeLabels = {
       AppColorScheme.light: l10n.colorSchemeLightLabel,
@@ -25,6 +27,12 @@ class SettingsScreen extends ConsumerWidget {
       AppColorScheme.darkModern: l10n.colorSchemeDarkModernLabel,
       AppColorScheme.urbanCamo: l10n.colorSchemeUrbanCamoLabel,
       AppColorScheme.harmoNeat: l10n.colorSchemeHarmoNeatLabel,
+    };
+
+    final chordInstrumentLabels = {
+      ChordInstrumentSound.guitar: l10n.chordInstrumentGuitarLabel,
+      ChordInstrumentSound.piano: l10n.chordInstrumentPianoLabel,
+      ChordInstrumentSound.femaleVoice: l10n.chordInstrumentFemaleVoiceLabel,
     };
 
     return Scaffold(
@@ -62,6 +70,33 @@ class SettingsScreen extends ConsumerWidget {
                   RadioListTile<AppColorScheme>(
                     title: Text(colorSchemeLabels[scheme]!),
                     value: scheme,
+                  ),
+              ],
+            ),
+          ),
+          const Divider(height: 1),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Text(
+              l10n.chordInstrumentSectionLabel,
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+          ),
+          RadioGroup<ChordInstrumentSound>(
+            groupValue: chordInstrument,
+            onChanged: (selected) {
+              if (selected != null) {
+                ref
+                    .read(chordInstrumentProvider.notifier)
+                    .setInstrument(selected);
+              }
+            },
+            child: Column(
+              children: [
+                for (final sound in ChordInstrumentSound.values)
+                  RadioListTile<ChordInstrumentSound>(
+                    title: Text(chordInstrumentLabels[sound]!),
+                    value: sound,
                   ),
               ],
             ),

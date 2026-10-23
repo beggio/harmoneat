@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
+import '../../../shared/music/tuning_presets.dart';
 import '../../tab/application/finger_colors.dart';
 import '../application/all_chords_data.dart';
 import 'chord_diagram_preview.dart';
@@ -44,10 +45,12 @@ class AllChordsScreen extends StatelessWidget {
                           ChordDiagramPreview(
                             label: '${root.rootName} major',
                             diagram: root.major,
+                            tuning: TuningPreset.standard.stringNames,
                           ),
                           ChordDiagramPreview(
                             label: '${root.rootName} minor',
                             diagram: root.minor,
+                            tuning: TuningPreset.standard.stringNames,
                           ),
                         ],
                       ),
