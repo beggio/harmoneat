@@ -30,20 +30,13 @@ class SettingsScreen extends ConsumerWidget {
     };
 
     final chordInstrumentLabels = {
-      ChordInstrumentSound.guitar: l10n.chordInstrumentGuitarLabel,
       ChordInstrumentSound.guitarSteel: l10n.chordInstrumentGuitarSteelLabel,
-      ChordInstrumentSound.guitarJazz: l10n.chordInstrumentGuitarJazzLabel,
-      ChordInstrumentSound.guitarClean: l10n.chordInstrumentGuitarCleanLabel,
-      ChordInstrumentSound.guitarPalmMuted:
-          l10n.chordInstrumentGuitarPalmMutedLabel,
       ChordInstrumentSound.guitarOverdrive:
           l10n.chordInstrumentGuitarOverdriveLabel,
       ChordInstrumentSound.guitarDistortion:
           l10n.chordInstrumentGuitarDistortionLabel,
-      ChordInstrumentSound.guitarHarmonics:
-          l10n.chordInstrumentGuitarHarmonicsLabel,
       ChordInstrumentSound.piano: l10n.chordInstrumentPianoLabel,
-      ChordInstrumentSound.femaleVoice: l10n.chordInstrumentFemaleVoiceLabel,
+      ChordInstrumentSound.choir: l10n.chordInstrumentChoirLabel,
     };
 
     return Scaffold(

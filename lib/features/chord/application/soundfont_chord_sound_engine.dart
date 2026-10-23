@@ -8,21 +8,16 @@ import 'chord_sound_engine.dart';
 
 const _soundfontAssetPath = 'assets/audio/MuseScore_General.sf2';
 
-/// General MIDI program numbers (0-indexed) for the three selectable
-/// chord-playback instruments. "Female voice" has no dedicated GM
-/// instrument — Choir Aahs is the standard stand-in (confirmed
-/// acceptable for v1).
+/// General MIDI program numbers (0-indexed) for the selectable
+/// chord-playback instruments. "Choir" has no dedicated female-voice GM
+/// instrument — Choir Aahs is a stand-in (see BACKLOG.md's "source a real
+/// female voice soundfont" feature).
 const _gmProgramFor = {
-  ChordInstrumentSound.guitar: 24, // Nylon String Guitar
   ChordInstrumentSound.guitarSteel: 25, // Steel String Guitar
-  ChordInstrumentSound.guitarJazz: 26, // Jazz Guitar
-  ChordInstrumentSound.guitarClean: 27, // Clean Guitar
-  ChordInstrumentSound.guitarPalmMuted: 28, // Palm Muted Guitar
   ChordInstrumentSound.guitarOverdrive: 29, // Overdrive Guitar
   ChordInstrumentSound.guitarDistortion: 30, // Distortion Guitar
-  ChordInstrumentSound.guitarHarmonics: 31, // Guitar Harmonics
   ChordInstrumentSound.piano: 0, // Acoustic Grand Piano
-  ChordInstrumentSound.femaleVoice: 52, // Choir Aahs
+  ChordInstrumentSound.choir: 52, // Choir Aahs
 };
 
 /// A gentle strum rather than a dead-simultaneous block chord.
@@ -33,24 +28,20 @@ const _strumStagger = Duration(milliseconds: 20);
 /// file does).
 const _playbackDuration = Duration(milliseconds: 1800);
 
-/// Every guitar-family GM program the user is A/B-testing for the
-/// trailing-ring bug (see BACKLOG.md) — all of these fade out rather than
-/// hard-cut, since the guitar samples themselves loop/sustain and an
-/// abrupt stop is what produces the audible ring.
-const _guitarVariants = {
-  ChordInstrumentSound.guitar,
+/// Instruments whose stop fades out instead of cutting off abruptly: the
+/// guitar variants rang when hard-stopped (see BACKLOG.md), and choir gets
+/// the same treatment to avoid its own harsh cutoff. Piano wasn't reported
+/// as having either problem, so it keeps the instant stop.
+const _fadesOutOnStop = {
   ChordInstrumentSound.guitarSteel,
-  ChordInstrumentSound.guitarJazz,
-  ChordInstrumentSound.guitarClean,
-  ChordInstrumentSound.guitarPalmMuted,
   ChordInstrumentSound.guitarOverdrive,
   ChordInstrumentSound.guitarDistortion,
-  ChordInstrumentSound.guitarHarmonics,
+  ChordInstrumentSound.choir,
 };
 
-/// Guitar's stop fades out instead of cutting off abruptly, for a clean
-/// end instead of the ring an instant stop produces.
-const _guitarFadeDuration = Duration(milliseconds: 1500);
+/// Fade-to-zero duration for [_fadesOutOnStop] instruments, for a clean
+/// end instead of the artifact an instant stop produces.
+const _fadeOutDuration = Duration(milliseconds: 1500);
 
 /// Finds the bank-0 (standard GM melodic bank) preset matching
 /// [programNumber], falling back to the first available preset if the
@@ -127,8 +118,8 @@ class SoundfontChordSoundEngine implements ChordSoundEngine {
   Future<void> stop() async {
     final player = _player;
     if (player == null) return;
-    if (_guitarVariants.contains(_loadedInstrument)) {
-      await player.allNotesOff(releaseDuration: _guitarFadeDuration);
+    if (_fadesOutOnStop.contains(_loadedInstrument)) {
+      await player.allNotesOff(releaseDuration: _fadeOutDuration);
     } else {
       await player.stopMixerOutput();
     }

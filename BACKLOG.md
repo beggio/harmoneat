@@ -47,16 +47,39 @@
     (the library's own envelope-release fade, not an abrupt stop) instead of
     `stopMixerOutput()`'s hard cut; piano/choir keep the instant stop since
     they weren't reported as ringing.
-  - **Also added**: every other bank-0 GM guitar-family program in the bundled
-    soundfont — Steel String (25), Jazz (26), Clean (27), Palm Muted (28),
-    Overdrive (29), Distortion (30), Harmonics (31) — as new
-    `ChordInstrumentSound` options alongside the original Nylon (24), selectable
-    from Settings, so the user can A/B listen to each with the new fade and
-    remove whichever don't sound right. All get the same 1.5s fade-to-zero on
-    stop, not just Nylon.
-  - **Not yet confirmed by ear** — I can't play audio myself; the user needs to
-    actually listen to confirm the fade reads as "clean" rather than just a
-    slower ring, and pick which guitar variant(s) to keep.
+  - **User listening test (2026-10-23) — result**: with the fade applied to all
+    8 GM guitar-family programs, only **Steel String (25), Overdrive (29), and
+    Distortion (30)** actually end cleanly — Nylon (24, the original default),
+    Jazz (26), Clean (27), Palm Muted (28), and Harmonics (31) still ring even
+    with the same 1.5s fade. This is a real datapoint for eventually fixing the
+    other five: whatever makes Steel/Overdrive/Distortion's samples cut cleanly
+    isn't just "has a fade" (all 8 had one) — it's something about those three
+    samples specifically (worth comparing their zone/envelope data again
+    against the five that still ring, next time this gets picked back up).
+  - **Removed from the selectable instrument list** (2026-10-23): Nylon, Jazz,
+    Clean, Palm Muted, and Harmonics — `ChordInstrumentSound` now only offers
+    Steel/Overdrive/Distortion as guitar options; Steel is the new default
+    (replacing Nylon). Not deleted from scope — see the "offer every guitar
+    option" feature below, which this bug's resolution is blocked on.
+  - Choir also switched to the same 1.5s fade-to-zero on stop (previously
+    instant-stop like piano) to eliminate its own harsh cutoff — not a ring
+    like guitar, just an abrupt end.
+
+- **Offer every GM guitar-family program as a chord-playback option, gated on
+  audio quality.** Feature, not yet done: Nylon, Jazz, Clean, Palm Muted, and
+  Harmonics were removed from the instrument picker above because they still
+  ring at the end of playback even with a 1.5s fade-to-zero; Steel, Overdrive,
+  and Distortion don't. The goal remains having all 8 bank-0 guitar programs
+  selectable, but each one only goes back in once its audio actually ends
+  cleanly — re-add individually as each is fixed, not as a block.
+
+- **Source a real female-voice soundfont.** Feature, not yet done: the
+  "Choir" chord-playback option (`ChordInstrumentSound.choir`) is General
+  MIDI's "Choir Aahs" — a mixed-voice patch, not a true female voice. Renamed
+  from "Female Voice" to "Choir" (2026-10-23) so the label matches what it
+  actually is instead of overclaiming. Needs an actual female-voice sample
+  library sourced and bundled (same build-time-fetch mechanism as the main
+  soundfont, if it's large) before a real "Female Voice" option can return.
 
 - **~~Chord playback sounds wrong on piano/guitar, and (separately) all three
   instruments went silent~~ (fixed 2026-10-23, confirmed by user re-test — all three
@@ -107,7 +130,10 @@
   page.** Likely a small static text addition near the existing splash branding
   (`lib/` splash screen widget) and somewhere on `settings_screen.dart` (e.g. near
   the bottom, similar to an "About" footer) — exact wording/placement not yet
-  decided.
+  decided. Confirmed still absent from the splash screen as of 2026-10-23 (never
+  implemented, not a regression) — this item being unresolved is why; it will stay
+  absent in a production build too until it's actually built, since a release
+  build just compiles whatever's in the source.
 
 - **Import tablature from a standard file format.** Investigate whether there's a
   widely-used tab file format worth supporting (e.g. Guitar Pro's `.gp*`/`.gpx`,

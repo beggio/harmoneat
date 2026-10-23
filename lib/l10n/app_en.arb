@@ -537,25 +537,9 @@
   "@chordInstrumentSectionLabel": {
     "description": "Heading for the chord-instrument-sound selector on the settings screen."
   },
-  "chordInstrumentGuitarLabel": "Guitar (Nylon)",
-  "@chordInstrumentGuitarLabel": {
-    "description": "Nylon-string guitar chord-playback instrument option."
-  },
   "chordInstrumentGuitarSteelLabel": "Guitar (Steel)",
   "@chordInstrumentGuitarSteelLabel": {
     "description": "Steel-string guitar chord-playback instrument option."
-  },
-  "chordInstrumentGuitarJazzLabel": "Guitar (Jazz)",
-  "@chordInstrumentGuitarJazzLabel": {
-    "description": "Jazz guitar chord-playback instrument option."
-  },
-  "chordInstrumentGuitarCleanLabel": "Guitar (Clean)",
-  "@chordInstrumentGuitarCleanLabel": {
-    "description": "Clean electric guitar chord-playback instrument option."
-  },
-  "chordInstrumentGuitarPalmMutedLabel": "Guitar (Palm Muted)",
-  "@chordInstrumentGuitarPalmMutedLabel": {
-    "description": "Palm-muted guitar chord-playback instrument option."
   },
   "chordInstrumentGuitarOverdriveLabel": "Guitar (Overdrive)",
   "@chordInstrumentGuitarOverdriveLabel": {
@@ -565,17 +549,13 @@
   "@chordInstrumentGuitarDistortionLabel": {
     "description": "Distortion guitar chord-playback instrument option."
   },
-  "chordInstrumentGuitarHarmonicsLabel": "Guitar (Harmonics)",
-  "@chordInstrumentGuitarHarmonicsLabel": {
-    "description": "Guitar harmonics chord-playback instrument option."
-  },
   "chordInstrumentPianoLabel": "Piano",
   "@chordInstrumentPianoLabel": {
     "description": "Piano chord-playback instrument option."
   },
-  "chordInstrumentFemaleVoiceLabel": "Female Voice",
-  "@chordInstrumentFemaleVoiceLabel": {
-    "description": "Choir/voice chord-playback instrument option."
+  "chordInstrumentChoirLabel": "Choir",
+  "@chordInstrumentChoirLabel": {
+    "description": "Choir chord-playback instrument option (GM Choir Aahs stand-in; no real female-voice soundfont yet, renamed from \"Female Voice\" to accurately describe what it actually is)."
   },
   "playChordLabel": "Play chord",
   "@playChordLabel": {

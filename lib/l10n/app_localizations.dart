@@ -838,35 +838,11 @@ abstract class AppLocalizations {
   /// **'Chord Playback Sound'**
   String get chordInstrumentSectionLabel;
 
-  /// Nylon-string guitar chord-playback instrument option.
-  ///
-  /// In en, this message translates to:
-  /// **'Guitar (Nylon)'**
-  String get chordInstrumentGuitarLabel;
-
   /// Steel-string guitar chord-playback instrument option.
   ///
   /// In en, this message translates to:
   /// **'Guitar (Steel)'**
   String get chordInstrumentGuitarSteelLabel;
-
-  /// Jazz guitar chord-playback instrument option.
-  ///
-  /// In en, this message translates to:
-  /// **'Guitar (Jazz)'**
-  String get chordInstrumentGuitarJazzLabel;
-
-  /// Clean electric guitar chord-playback instrument option.
-  ///
-  /// In en, this message translates to:
-  /// **'Guitar (Clean)'**
-  String get chordInstrumentGuitarCleanLabel;
-
-  /// Palm-muted guitar chord-playback instrument option.
-  ///
-  /// In en, this message translates to:
-  /// **'Guitar (Palm Muted)'**
-  String get chordInstrumentGuitarPalmMutedLabel;
 
   /// Overdrive guitar chord-playback instrument option.
   ///
@@ -880,23 +856,17 @@ abstract class AppLocalizations {
   /// **'Guitar (Distortion)'**
   String get chordInstrumentGuitarDistortionLabel;
 
-  /// Guitar harmonics chord-playback instrument option.
-  ///
-  /// In en, this message translates to:
-  /// **'Guitar (Harmonics)'**
-  String get chordInstrumentGuitarHarmonicsLabel;
-
   /// Piano chord-playback instrument option.
   ///
   /// In en, this message translates to:
   /// **'Piano'**
   String get chordInstrumentPianoLabel;
 
-  /// Choir/voice chord-playback instrument option.
+  /// Choir chord-playback instrument option (GM Choir Aahs stand-in; no real female-voice soundfont yet, renamed from "Female Voice" to accurately describe what it actually is).
   ///
   /// In en, this message translates to:
-  /// **'Female Voice'**
-  String get chordInstrumentFemaleVoiceLabel;
+  /// **'Choir'**
+  String get chordInstrumentChoirLabel;
 
   /// Tooltip for the button that plays a chord diagram's voicing.
   ///

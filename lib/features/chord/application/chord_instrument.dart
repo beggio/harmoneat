@@ -8,28 +8,26 @@ const _chordInstrumentKey = 'chordInstrumentSound';
 /// general appearance setting, so it lives here rather than in
 /// `lib/app/theme.dart` alongside color scheme/text scale/locale.
 ///
-/// The `guitar*` variants are a temporary A/B set (see BACKLOG.md's
-/// "guitar ringing" bug) — every bank-0 GM guitar program in the bundled
-/// soundfont, added so the user can listen to each and remove the ones
-/// that don't resolve the trailing-ring artifact.
+/// Only the guitar variants confirmed (by ear, 2026-10-23) to end cleanly
+/// are offered — see BACKLOG.md's "guitar ringing" bug for the other GM
+/// guitar programs (Nylon, Jazz, Clean, Palm Muted, Harmonics), which still
+/// rang even with the fade-out fix and were removed pending further
+/// remediation, and for the "offer every guitar option" feature this is
+/// gated behind. `choir` has no real female-voice soundfont yet — it's the
+/// GM "Choir Aahs" stand-in — also tracked as a backlog feature.
 enum ChordInstrumentSound {
-  guitar, // Nylon String Guitar (GM program 24) — original default.
-  guitarSteel,
-  guitarJazz,
-  guitarClean,
-  guitarPalmMuted,
+  guitarSteel, // Steel String Guitar (GM program 25) — current default.
   guitarOverdrive,
   guitarDistortion,
-  guitarHarmonics,
   piano,
-  femaleVoice,
+  choir,
 }
 
 class ChordInstrumentNotifier extends Notifier<ChordInstrumentSound> {
   @override
   ChordInstrumentSound build() {
     _load();
-    return ChordInstrumentSound.guitar;
+    return ChordInstrumentSound.guitarSteel;
   }
 
   Future<void> _load() async {
@@ -38,7 +36,7 @@ class ChordInstrumentNotifier extends Notifier<ChordInstrumentSound> {
     if (stored != null) {
       state = ChordInstrumentSound.values.firstWhere(
         (s) => s.name == stored,
-        orElse: () => ChordInstrumentSound.guitar,
+        orElse: () => ChordInstrumentSound.guitarSteel,
       );
     }
   }

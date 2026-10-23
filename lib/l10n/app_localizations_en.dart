@@ -408,19 +408,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chordInstrumentSectionLabel => 'Chord Playback Sound';
 
   @override
-  String get chordInstrumentGuitarLabel => 'Guitar (Nylon)';
-
-  @override
   String get chordInstrumentGuitarSteelLabel => 'Guitar (Steel)';
-
-  @override
-  String get chordInstrumentGuitarJazzLabel => 'Guitar (Jazz)';
-
-  @override
-  String get chordInstrumentGuitarCleanLabel => 'Guitar (Clean)';
-
-  @override
-  String get chordInstrumentGuitarPalmMutedLabel => 'Guitar (Palm Muted)';
 
   @override
   String get chordInstrumentGuitarOverdriveLabel => 'Guitar (Overdrive)';
@@ -429,13 +417,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chordInstrumentGuitarDistortionLabel => 'Guitar (Distortion)';
 
   @override
-  String get chordInstrumentGuitarHarmonicsLabel => 'Guitar (Harmonics)';
-
-  @override
   String get chordInstrumentPianoLabel => 'Piano';
 
   @override
-  String get chordInstrumentFemaleVoiceLabel => 'Female Voice';
+  String get chordInstrumentChoirLabel => 'Choir';
 
   @override
   String get playChordLabel => 'Play chord';
