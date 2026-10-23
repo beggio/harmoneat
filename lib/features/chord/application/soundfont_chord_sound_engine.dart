@@ -13,7 +13,14 @@ const _soundfontAssetPath = 'assets/audio/MuseScore_General.sf2';
 /// instrument — Choir Aahs is the standard stand-in (confirmed
 /// acceptable for v1).
 const _gmProgramFor = {
-  ChordInstrumentSound.guitar: 24, // Acoustic Guitar (nylon)
+  ChordInstrumentSound.guitar: 24, // Nylon String Guitar
+  ChordInstrumentSound.guitarSteel: 25, // Steel String Guitar
+  ChordInstrumentSound.guitarJazz: 26, // Jazz Guitar
+  ChordInstrumentSound.guitarClean: 27, // Clean Guitar
+  ChordInstrumentSound.guitarPalmMuted: 28, // Palm Muted Guitar
+  ChordInstrumentSound.guitarOverdrive: 29, // Overdrive Guitar
+  ChordInstrumentSound.guitarDistortion: 30, // Distortion Guitar
+  ChordInstrumentSound.guitarHarmonics: 31, // Guitar Harmonics
   ChordInstrumentSound.piano: 0, // Acoustic Grand Piano
   ChordInstrumentSound.femaleVoice: 52, // Choir Aahs
 };
@@ -25,6 +32,25 @@ const _strumStagger = Duration(milliseconds: 20);
 /// user — synthesized notes have no natural "end" the way a recorded
 /// file does).
 const _playbackDuration = Duration(milliseconds: 1800);
+
+/// Every guitar-family GM program the user is A/B-testing for the
+/// trailing-ring bug (see BACKLOG.md) — all of these fade out rather than
+/// hard-cut, since the guitar samples themselves loop/sustain and an
+/// abrupt stop is what produces the audible ring.
+const _guitarVariants = {
+  ChordInstrumentSound.guitar,
+  ChordInstrumentSound.guitarSteel,
+  ChordInstrumentSound.guitarJazz,
+  ChordInstrumentSound.guitarClean,
+  ChordInstrumentSound.guitarPalmMuted,
+  ChordInstrumentSound.guitarOverdrive,
+  ChordInstrumentSound.guitarDistortion,
+  ChordInstrumentSound.guitarHarmonics,
+};
+
+/// Guitar's stop fades out instead of cutting off abruptly, for a clean
+/// end instead of the ring an instant stop produces.
+const _guitarFadeDuration = Duration(milliseconds: 1500);
 
 /// Finds the bank-0 (standard GM melodic bank) preset matching
 /// [programNumber], falling back to the first available preset if the
@@ -99,7 +125,13 @@ class SoundfontChordSoundEngine implements ChordSoundEngine {
 
   @override
   Future<void> stop() async {
-    await _player?.stopMixerOutput();
+    final player = _player;
+    if (player == null) return;
+    if (_guitarVariants.contains(_loadedInstrument)) {
+      await player.allNotesOff(releaseDuration: _guitarFadeDuration);
+    } else {
+      await player.stopMixerOutput();
+    }
   }
 
   @override

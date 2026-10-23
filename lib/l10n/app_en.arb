@@ -537,9 +537,37 @@
   "@chordInstrumentSectionLabel": {
     "description": "Heading for the chord-instrument-sound selector on the settings screen."
   },
-  "chordInstrumentGuitarLabel": "Guitar",
+  "chordInstrumentGuitarLabel": "Guitar (Nylon)",
   "@chordInstrumentGuitarLabel": {
-    "description": "Guitar chord-playback instrument option."
+    "description": "Nylon-string guitar chord-playback instrument option."
+  },
+  "chordInstrumentGuitarSteelLabel": "Guitar (Steel)",
+  "@chordInstrumentGuitarSteelLabel": {
+    "description": "Steel-string guitar chord-playback instrument option."
+  },
+  "chordInstrumentGuitarJazzLabel": "Guitar (Jazz)",
+  "@chordInstrumentGuitarJazzLabel": {
+    "description": "Jazz guitar chord-playback instrument option."
+  },
+  "chordInstrumentGuitarCleanLabel": "Guitar (Clean)",
+  "@chordInstrumentGuitarCleanLabel": {
+    "description": "Clean electric guitar chord-playback instrument option."
+  },
+  "chordInstrumentGuitarPalmMutedLabel": "Guitar (Palm Muted)",
+  "@chordInstrumentGuitarPalmMutedLabel": {
+    "description": "Palm-muted guitar chord-playback instrument option."
+  },
+  "chordInstrumentGuitarOverdriveLabel": "Guitar (Overdrive)",
+  "@chordInstrumentGuitarOverdriveLabel": {
+    "description": "Overdrive guitar chord-playback instrument option."
+  },
+  "chordInstrumentGuitarDistortionLabel": "Guitar (Distortion)",
+  "@chordInstrumentGuitarDistortionLabel": {
+    "description": "Distortion guitar chord-playback instrument option."
+  },
+  "chordInstrumentGuitarHarmonicsLabel": "Guitar (Harmonics)",
+  "@chordInstrumentGuitarHarmonicsLabel": {
+    "description": "Guitar harmonics chord-playback instrument option."
   },
   "chordInstrumentPianoLabel": "Piano",
   "@chordInstrumentPianoLabel": {

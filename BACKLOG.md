@@ -26,15 +26,37 @@
 
 ## Bugs
 
-- **Guitar chord playback rings at the end of the note instead of cutting off
-  cleanly.** Reported by the user after confirming the piano/guitar/voice silence
-  fix (2026-10-23). Only affects the guitar instrument choice. Likely the Nylon
-  String Guitar (GM program 24) sample/zone itself has a long natural release or a
-  loop tail that doesn't suit a short strummed chord; one possible fix is trying a
-  different GM guitar program (e.g. Acoustic Guitar (steel), program 25) from the
-  same bundled soundfont instead of Nylon String Guitar — see
-  `lib/features/chord/application/soundfont_chord_sound_engine.dart`'s
-  `_gmProgramFor` map. Not yet investigated.
+- **~~Guitar chord playback rings at the end of the note instead of cutting off
+  cleanly~~ (mitigated 2026-10-23, pending user listening test).** Reported by the
+  user after confirming the piano/guitar/voice silence fix; re-confirmed
+  afterward that piano and voice both stop cleanly and only guitar rings.
+  Investigated via a throwaway diagnostic (`flutter test` loading the real
+  bundled `.sf2` and dumping every bank-0 guitar-family preset's zone data):
+  found **no structural difference** between guitar/piano/choir — all three use
+  continuously-looping sample zones, and the existing stop path
+  (`SoundFontPlayer.stopMixerOutput()` → `allNotesOff(releaseDuration: Duration.zero)`
+  → an immediate `SoLoud.stop()` per handle) should hard-kill every instrument's
+  voices identically. Most likely explanation: a real recorded guitar pluck has
+  an audible, resonant decay baked into the sample itself, and SoLoud's abrupt
+  amplitude cutoff on that kind of waveform is what reads as a "ring" — piano/
+  choir samples apparently don't have the same audible artifact when cut the
+  same way.
+  - **Fix applied**: `SoundfontChordSoundEngine.stop()` now branches on
+    instrument — any guitar variant fades to silence over 1.5s via
+    `SoundFontPlayer.allNotesOff(releaseDuration: Duration(milliseconds: 1500))`
+    (the library's own envelope-release fade, not an abrupt stop) instead of
+    `stopMixerOutput()`'s hard cut; piano/choir keep the instant stop since
+    they weren't reported as ringing.
+  - **Also added**: every other bank-0 GM guitar-family program in the bundled
+    soundfont — Steel String (25), Jazz (26), Clean (27), Palm Muted (28),
+    Overdrive (29), Distortion (30), Harmonics (31) — as new
+    `ChordInstrumentSound` options alongside the original Nylon (24), selectable
+    from Settings, so the user can A/B listen to each with the new fade and
+    remove whichever don't sound right. All get the same 1.5s fade-to-zero on
+    stop, not just Nylon.
+  - **Not yet confirmed by ear** — I can't play audio myself; the user needs to
+    actually listen to confirm the fade reads as "clean" rather than just a
+    slower ring, and pick which guitar variant(s) to keep.
 
 - **~~Chord playback sounds wrong on piano/guitar, and (separately) all three
   instruments went silent~~ (fixed 2026-10-23, confirmed by user re-test — all three

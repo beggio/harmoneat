@@ -838,11 +838,53 @@ abstract class AppLocalizations {
   /// **'Chord Playback Sound'**
   String get chordInstrumentSectionLabel;
 
-  /// Guitar chord-playback instrument option.
+  /// Nylon-string guitar chord-playback instrument option.
   ///
   /// In en, this message translates to:
-  /// **'Guitar'**
+  /// **'Guitar (Nylon)'**
   String get chordInstrumentGuitarLabel;
+
+  /// Steel-string guitar chord-playback instrument option.
+  ///
+  /// In en, this message translates to:
+  /// **'Guitar (Steel)'**
+  String get chordInstrumentGuitarSteelLabel;
+
+  /// Jazz guitar chord-playback instrument option.
+  ///
+  /// In en, this message translates to:
+  /// **'Guitar (Jazz)'**
+  String get chordInstrumentGuitarJazzLabel;
+
+  /// Clean electric guitar chord-playback instrument option.
+  ///
+  /// In en, this message translates to:
+  /// **'Guitar (Clean)'**
+  String get chordInstrumentGuitarCleanLabel;
+
+  /// Palm-muted guitar chord-playback instrument option.
+  ///
+  /// In en, this message translates to:
+  /// **'Guitar (Palm Muted)'**
+  String get chordInstrumentGuitarPalmMutedLabel;
+
+  /// Overdrive guitar chord-playback instrument option.
+  ///
+  /// In en, this message translates to:
+  /// **'Guitar (Overdrive)'**
+  String get chordInstrumentGuitarOverdriveLabel;
+
+  /// Distortion guitar chord-playback instrument option.
+  ///
+  /// In en, this message translates to:
+  /// **'Guitar (Distortion)'**
+  String get chordInstrumentGuitarDistortionLabel;
+
+  /// Guitar harmonics chord-playback instrument option.
+  ///
+  /// In en, this message translates to:
+  /// **'Guitar (Harmonics)'**
+  String get chordInstrumentGuitarHarmonicsLabel;
 
   /// Piano chord-playback instrument option.
   ///

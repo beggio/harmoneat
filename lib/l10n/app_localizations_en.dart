@@ -408,7 +408,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chordInstrumentSectionLabel => 'Chord Playback Sound';
 
   @override
-  String get chordInstrumentGuitarLabel => 'Guitar';
+  String get chordInstrumentGuitarLabel => 'Guitar (Nylon)';
+
+  @override
+  String get chordInstrumentGuitarSteelLabel => 'Guitar (Steel)';
+
+  @override
+  String get chordInstrumentGuitarJazzLabel => 'Guitar (Jazz)';
+
+  @override
+  String get chordInstrumentGuitarCleanLabel => 'Guitar (Clean)';
+
+  @override
+  String get chordInstrumentGuitarPalmMutedLabel => 'Guitar (Palm Muted)';
+
+  @override
+  String get chordInstrumentGuitarOverdriveLabel => 'Guitar (Overdrive)';
+
+  @override
+  String get chordInstrumentGuitarDistortionLabel => 'Guitar (Distortion)';
+
+  @override
+  String get chordInstrumentGuitarHarmonicsLabel => 'Guitar (Harmonics)';
 
   @override
   String get chordInstrumentPianoLabel => 'Piano';
