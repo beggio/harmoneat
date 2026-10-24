@@ -211,15 +211,14 @@
   notice hasn't been acknowledged, with a "Don't show this again" checkbox (checked by
   default) controlling whether the acknowledgement is persisted.
 
-- **"Tab" button in the note-detail toolbar — guitar tab editor.** Tapping it creates a
-  new blank guitar tab (standard tablature notation — see
-  https://eddiesguitars.com/what-is-guitar-tablature/ for the format: six horizontal
-  lines per string, fret numbers placed on them to show individual notes and chords
-  read left to right). Users need to add individual notes and chords onto the tab, and
-  change, edit, delete, and add further tabs for the same note. This is Phase 4 of the
-  original roadmap (`chord_chart`/`tabs`/`notation` tables already FK'd to `parts` in
-  the schema; plan called for a hand-rolled `CustomPainter` editor/renderer rather than
-  a third-party package) — this entry is the concrete trigger to build it.
+- **~~"Tab" button in the note-detail toolbar — guitar tab editor~~ (shipped, date not
+  recorded — confirmed already built 2026-10-23).** Tapping it creates a new guitar
+  tab and opens `lib/features/tab/presentation/tab_editor_screen.dart`, rendered via
+  `tab_staff_painter.dart` (standard six-line tablature). Backed by
+  `guitarTabsRepositoryProvider`/`guitar_tabs_provider.dart` and `tab_data.dart`, wired
+  into the note-detail toolbar alongside Chord/Notation. This entry had been sitting in
+  Features as "not yet built" past the point it actually shipped — corrected here
+  rather than left stale.
 
 - **~~"Chord" button in the note-detail toolbar — chord chart editor~~ (shipped
   2026-10-22).** Tapping it creates a blank chord chart and opens
