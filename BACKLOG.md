@@ -178,6 +178,17 @@
   absent in a production build too until it's actually built, since a release
   build just compiles whatever's in the source.
 
+- **Fill out the remaining chord categories in the "All Chords" resource, with
+  per-category toggles.** `all_chords_data.dart` currently only generates major and
+  minor (via the E-shape/A-shape barre formulas plus open-chord overrides) — add
+  suspended, diminished, seventh, and (fifth) power chords for all 12 roots, each
+  needing its own movable-shape formula(s) researched and verified the same way
+  major/minor's barre shapes were (see that entry's own test coverage in
+  `all_chords_data_test.dart` for the pattern to follow). Add toggles to show/hide
+  each category independently — major, minor, suspended, diminished, seventh,
+  power — on `all_chords_screen.dart`, likely as a filter row above the chord grid;
+  default on/off state per category not yet decided.
+
 - **Lyric authoring tool, styled like a Markdown wiki's code block.** A new content
   type for a note's Text tab: a distinct "lyric block" that visually stands apart
   from surrounding plain text — similar to how a fenced code block is set off from
