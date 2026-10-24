@@ -27,7 +27,7 @@
 ## Bugs
 
 - **~~Guitar chord playback rings at the end of the note instead of cutting off
-  cleanly~~ (mitigated 2026-10-23, pending user listening test).** Reported by the
+  cleanly~~ (resolved 2026-10-23).** Reported by the
   user after confirming the piano/guitar/voice silence fix; re-confirmed
   afterward that piano and voice both stop cleanly and only guitar rings.
   Investigated via a throwaway diagnostic (`flutter test` loading the real
@@ -64,6 +64,49 @@
   - Choir also switched to the same 1.5s fade-to-zero on stop (previously
     instant-stop like piano) to eliminate its own harsh cutoff — not a ring
     like guitar, just an abrupt end.
+  - **Reopened (2026-10-23, same day) — fade did not actually fix it.** Fresh
+    listening test on the rebuilt app (Steel/Overdrive/Distortion guitars +
+    choir, all with the 1.5s fade) found **all four still exhibit the noise
+    at the end of playback**; piano does not and never has. This means the
+    round-2 "Steel/Overdrive/Distortion end cleanly" result did not hold up
+    under further listening — treat that earlier finding as superseded.
+    User's hypothesis was that this is a looping artifact (guitar/choir loop,
+    piano supposedly doesn't). **That's not supported by the evidence
+    already gathered**: the zone-data diagnostic above found piano *also*
+    uses continuous looping with valid loop points — so looping alone can't
+    be what distinguishes piano from the others. The one real difference
+    that does line up with the data: piano has always used the instant
+    `stopMixerOutput()` hard-stop and has never rung, while guitar and choir
+    are the only two instruments routed through the 1.5s
+    `allNotesOff(releaseDuration:)` fade path — and both still ring with it.
+    That correlation (fade/release path present → noise present) is a better
+    fit than looping, but is itself unconfirmed at the code level — no root
+    cause has actually been isolated yet. Next time this is picked up: try
+    reverting the fade and hard-stopping guitar/choir exactly like piano to
+    see if the noise disappears or is unrelated to the fade mechanism
+    entirely.
+  - **Resolved (2026-10-23, same day).** Tried the hard-stop experiment:
+    reverted guitar/choir to the exact same instant `stopMixerOutput()` path
+    piano has always used. Result was initially reported as "still noisy,
+    same as before" — but on further listening with every instrument
+    hard-stopped identically, the user confirmed they all sound correct.
+    This rules out the stop mechanism (fade vs. instant) as the cause
+    either way, since both produced the same result. Kept the hard stop for
+    all instruments (removed the now-pointless 1.5s fade code entirely —
+    see `SoundfontChordSoundEngine.stop()`) since it's simpler and sounds
+    the same as the fade did. See the new "less terse end-of-playback"
+    feature below for the actual remaining ask (abrupt-but-correct vs.
+    smooth).
+
+- **Find a genuinely less terse way to end chord playback.** All instruments
+  currently hard-stop instantly (`SoundFontPlayer.stopMixerOutput()`) — this
+  is correct/acceptable per the user's listening test (2026-10-23), but it's
+  still an abrupt cutoff rather than a natural-sounding end. A naive 1.5s
+  linear release fade (`allNotesOff(releaseDuration:)`) was tried and made no
+  audible difference, so simply re-adding that isn't the fix — worth
+  investigating a shorter/differently-shaped envelope, or whether the
+  perceived abruptness is actually about *when* in the waveform playback
+  stops (e.g. not at a zero-crossing) rather than *how fast* it fades.
 
 - **Offer every GM guitar-family program as a chord-playback option, gated on
   audio quality.** Feature, not yet done: Nylon, Jazz, Clean, Palm Muted, and

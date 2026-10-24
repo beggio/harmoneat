@@ -28,21 +28,6 @@ const _strumStagger = Duration(milliseconds: 20);
 /// file does).
 const _playbackDuration = Duration(milliseconds: 1800);
 
-/// Instruments whose stop fades out instead of cutting off abruptly: the
-/// guitar variants rang when hard-stopped (see BACKLOG.md), and choir gets
-/// the same treatment to avoid its own harsh cutoff. Piano wasn't reported
-/// as having either problem, so it keeps the instant stop.
-const _fadesOutOnStop = {
-  ChordInstrumentSound.guitarSteel,
-  ChordInstrumentSound.guitarOverdrive,
-  ChordInstrumentSound.guitarDistortion,
-  ChordInstrumentSound.choir,
-};
-
-/// Fade-to-zero duration for [_fadesOutOnStop] instruments, for a clean
-/// end instead of the artifact an instant stop produces.
-const _fadeOutDuration = Duration(milliseconds: 1500);
-
 /// Finds the bank-0 (standard GM melodic bank) preset matching
 /// [programNumber], falling back to the first available preset if the
 /// soundfont doesn't have one — rather than silently playing nothing.
@@ -118,11 +103,10 @@ class SoundfontChordSoundEngine implements ChordSoundEngine {
   Future<void> stop() async {
     final player = _player;
     if (player == null) return;
-    if (_fadesOutOnStop.contains(_loadedInstrument)) {
-      await player.allNotesOff(releaseDuration: _fadeOutDuration);
-    } else {
-      await player.stopMixerOutput();
-    }
+    // All instruments hard-stop the same way — a tried 1.5s release fade on
+    // guitar/choir didn't fix or change the end-of-playback noise, so it was
+    // dropped rather than kept as unneeded complexity (see BACKLOG.md).
+    await player.stopMixerOutput();
   }
 
   @override
