@@ -178,6 +178,12 @@
   absent in a production build too until it's actually built, since a release
   build just compiles whatever's in the source.
 
+- **Show a version indicator in the bottom-right corner of the Settings page.**
+  The app version is already read via `package_info_plus` for the splash screen's
+  version check (`app_version_provider.dart`) — reuse that provider to render a
+  small, unobtrusive label (e.g. `v1.0.0+3`) anchored to the bottom-right of
+  `settings_screen.dart` rather than fetching it separately.
+
 - **Import tablature from a standard file format.** Investigate whether there's a
   widely-used tab file format worth supporting (e.g. Guitar Pro's `.gp*`/`.gpx`,
   the plain-text ASCII-tab convention, or MusicXML's tablature support) and, if
