@@ -178,6 +178,14 @@
   absent in a production build too until it's actually built, since a release
   build just compiles whatever's in the source.
 
+- **Major UI aesthetic/style pass before production.** Current UI is functional and
+  good enough for testing (stock Material 3 widgets, default spacing/elevation,
+  minimal custom styling beyond the color schemes and font choice) but needs a real
+  beautification/polish pass before shipping — layout, spacing, iconography,
+  animations/transitions, and overall visual identity, not just color/font, across
+  every screen (Notes, note detail tabs, Chord/Tab/Notation editors, Resources,
+  Settings). Scope and specific direction not yet decided.
+
 - **Show a version indicator in the bottom-right corner of the Settings page.**
   The app version is already read via `package_info_plus` for the splash screen's
   version check (`app_version_provider.dart`) — reuse that provider to render a
