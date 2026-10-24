@@ -178,6 +178,18 @@
   absent in a production build too until it's actually built, since a release
   build just compiles whatever's in the source.
 
+- **Lyric authoring tool, styled like a Markdown wiki's code block.** A new content
+  type for a note's Text tab: a distinct "lyric block" that visually stands apart
+  from surrounding plain text — similar to how a fenced code block is set off from
+  prose in a Markdown wiki — rather than just another paragraph. Visual direction:
+  looks like a sheet of paper floating over the rest of the note, with a drop
+  shadow, not just a background-color/border treatment. Needs its own editing
+  affordance (inserting/removing a lyric block within `note_body_tab.dart`'s text,
+  or a new sibling block type) and rendering; scope/data model not yet decided —
+  whether it's inline Markdown-style syntax inside the existing note body or a
+  separate structured block (more consistent with how Chord/Tab/Notation are their
+  own tables) is an open design question.
+
 - **Major UI aesthetic/style pass before production.** Current UI is functional and
   good enough for testing (stock Material 3 widgets, default spacing/elevation,
   minimal custom styling beyond the color schemes and font choice) but needs a real
